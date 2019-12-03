@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Laporan Jurnal Umum" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ee2470e2-3100-4294-a944-34e32faba826">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="HeaderStyle" mode="Opaque" backcolor="#CCCCCC" fill="Solid" fontName="Cambria Math" fontSize="12">
+		<pen lineWidth="0.5" lineColor="#000000"/>
+		<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+			<topPen lineWidth="0.75" lineColor="#999999"/>
+			<leftPen lineWidth="0.75" lineColor="#999999"/>
+			<bottomPen lineWidth="0.75" lineColor="#999999"/>
+			<rightPen lineWidth="0.75" lineColor="#999999"/>
+		</box>
+	</style>
+	<style name="RecordStyle" hAlign="Left" vAlign="Middle" fontName="Cambria Math" fontSize="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false">
+		<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+			<topPen lineWidth="0.25" lineColor="#CCCCCC"/>
+			<leftPen lineWidth="0.25" lineColor="#CCCCCC"/>
+			<bottomPen lineWidth="0.25" lineColor="#CCCCCC"/>
+			<rightPen lineWidth="0.25" lineColor="#CCCCCC"/>
+		</box>
+		<paragraph leftIndent="5" rightIndent="5"/>
+	</style>
+	<parameter name="BULAN" class="java.lang.String"/>
+	<parameter name="TAHUN" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     jurnal.`tanggal` AS jurnal_tanggal,
+     jurnal.`ref` AS jurnal_ref,
+     jurnal.`keterangan` AS jurnal_keterangan,
+     jurnal.`debit` AS jurnal_debit,
+     jurnal.`kredit` AS jurnal_kredit
+FROM
+     `jurnal` jurnal
+WHERE
+     MONTHNAME(jurnal.tanggal)=$P{BULAN} AND YEAR(jurnal.tanggal)=$P{TAHUN}]]>
+	</queryString>
+	<field name="jurnal_tanggal" class="java.sql.Date"/>
+	<field name="jurnal_ref" class="java.lang.String"/>
+	<field name="jurnal_keterangan" class="java.lang.String"/>
+	<field name="jurnal_debit" class="java.lang.Long"/>
+	<field name="jurnal_kredit" class="java.lang.Long"/>
+	<variable name="TOTAL_DEBIT" class="java.lang.Number" calculation="Sum">
+		<variableExpression><![CDATA[$F{jurnal_debit}]]></variableExpression>
+		<initialValueExpression><![CDATA[]]></initialValueExpression>
+	</variable>
+	<variable name="TOTAL_KREDIT" class="java.lang.Number" calculation="Sum">
+		<variableExpression><![CDATA[$F{jurnal_kredit}]]></variableExpression>
+	</variable>
+	<group name="jurnal_tanggal">
+		<groupExpression><![CDATA[$F{jurnal_tanggal}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="102" splitType="Stretch">
+			<staticText>
+				<reportElement x="120" y="43" width="435" height="20" uuid="c0f2926e-cfcc-4ad3-b112-c6028bcff41e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Cambria Math" size="12"/>
+				</textElement>
+				<text><![CDATA[Penjualan dan Penyewaan Mesin Foto Copy dan Perlengkapannya]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="120" y="0" width="435" height="43" uuid="6d545fa1-f368-4c7b-abde-ac690ee09b66"/>
+				<textElement>
+					<font fontName="Cambria Math" size="30"/>
+				</textElement>
+				<text><![CDATA[CV. Surya Printindo]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="94" width="555" height="1" uuid="335053c1-baca-42e7-a1c6-538fe679a831"/>
+				<graphicElement>
+					<pen lineWidth="1.75"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="120" y="63" width="435" height="20" uuid="0ffc13fe-879e-4a42-af65-b2d8a49dce59"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Cambria Math" size="12"/>
+				</textElement>
+				<text><![CDATA[Alamat : Jl Rajawali Kompl Taman Rajawali Bl III/7]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="57" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="29" width="555" height="20" uuid="bab66feb-872a-4d15-b6eb-928b12f6ff0e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Cambria Math" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Periode Bulan " + $P{BULAN} + " " + $P{TAHUN}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="29" uuid="64aab47e-a50a-456c-955a-f0589daefbf1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Cambria Math" size="18"/>
+				</textElement>
+				<text><![CDATA[Laporan Jurnal Umum]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement style="HeaderStyle" x="0" y="0" width="100" height="20" uuid="1e1f7744-58ae-46e6-b491-15bcc212f30f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Tanggal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="HeaderStyle" x="100" y="0" width="283" height="20" uuid="0a210dc9-e9ad-4490-8a9d-2f2604c0188b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Keterangan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="HeaderStyle" x="383" y="0" width="86" height="20" uuid="f280b22e-7ff6-48e1-97b5-f47c638b2774"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Debit]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="HeaderStyle" x="469" y="0" width="86" height="20" uuid="91a77ff9-9f4a-4141-b9f5-1388eca81bbb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Kredit]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField pattern="dd-MMM">
+				<reportElement style="RecordStyle" isPrintRepeatedValues="false" x="0" y="0" width="100" height="20" uuid="a4c1078f-4ff8-4cba-bc4f-10376c582914"/>
+				<textFieldExpression><![CDATA[$F{jurnal_tanggal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="RecordStyle" x="100" y="0" width="283" height="20" uuid="6632dd84-7395-4c48-8b75-d22b6add2b7b"/>
+				<textFieldExpression><![CDATA[$F{jurnal_keterangan}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="RecordStyle" x="383" y="0" width="86" height="20" uuid="703c16b0-1a53-4236-b267-a746810028ff"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{jurnal_debit}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="RecordStyle" x="469" y="0" width="86" height="20" uuid="929827a9-ca42-4c55-838e-a26f27ce898c"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{jurnal_kredit}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="8" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="4" splitType="Stretch"/>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="148">
+			<staticText>
+				<reportElement x="0" y="85" width="175" height="29" uuid="8441fd57-dfc1-4059-9f2b-489ccd82bd79"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Cambria Math" size="12"/>
+				</textElement>
+				<text><![CDATA[(                                                    )]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="175" height="29" uuid="790661c7-a462-4317-a838-5a5f9ca6a97d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Cambria Math" size="12"/>
+				</textElement>
+				<text><![CDATA[Dibuat Oleh :]]></text>
+			</staticText>
+		</band>
+	</lastPageFooter>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<textField pattern="#,##0">
+				<reportElement style="RecordStyle" x="383" y="0" width="86" height="20" uuid="3294360f-e495-4594-a5bf-694b2fdb4f44"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{TOTAL_DEBIT}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="RecordStyle" x="469" y="0" width="86" height="20" uuid="d92bc07a-c508-480f-bf65-09ee796f0061"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{TOTAL_KREDIT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

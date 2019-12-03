@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Laporan Pelanggan" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="HeaderStyle" mode="Opaque" backcolor="#CCCCCC" fill="Solid" fontName="Cambria Math" fontSize="12">
+		<pen lineWidth="0.5" lineColor="#000000"/>
+		<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+			<topPen lineWidth="0.75" lineColor="#999999"/>
+			<leftPen lineWidth="0.75" lineColor="#999999"/>
+			<bottomPen lineWidth="0.75" lineColor="#999999"/>
+			<rightPen lineWidth="0.75" lineColor="#999999"/>
+		</box>
+	</style>
+	<style name="RecordStyle" hAlign="Left" vAlign="Middle" fontName="Cambria Math" fontSize="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false">
+		<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+			<topPen lineWidth="0.25" lineColor="#CCCCCC"/>
+			<leftPen lineWidth="0.25" lineColor="#CCCCCC"/>
+			<bottomPen lineWidth="0.25" lineColor="#CCCCCC"/>
+			<rightPen lineWidth="0.25" lineColor="#CCCCCC"/>
+		</box>
+		<paragraph leftIndent="5" rightIndent="5"/>
+	</style>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     pelanggan.`id` AS pelanggan_id,
+     pelanggan.`nama` AS pelanggan_nama,
+     pelanggan.`jenis_kelamin` AS pelanggan_jenis_kelamin,
+     pelanggan.`alamat` AS pelanggan_alamat,
+     pelanggan.`no_ktp` AS pelanggan_no_ktp
+FROM
+     `pelanggan` pelanggan]]>
+	</queryString>
+	<field name="pelanggan_id" class="java.lang.String"/>
+	<field name="pelanggan_nama" class="java.lang.String"/>
+	<field name="pelanggan_jenis_kelamin" class="java.lang.String"/>
+	<field name="pelanggan_alamat" class="java.lang.String"/>
+	<field name="pelanggan_no_ktp" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="105" splitType="Stretch">
+			<staticText>
+				<reportElement x="120" y="0" width="435" height="43"/>
+				<textElement>
+					<font fontName="Cambria Math" size="30"/>
+				</textElement>
+				<text><![CDATA[CV. Surya Printindo]]></text>
+			</staticText>
+			<image>
+				<reportElement x="32" y="0" width="88" height="84"/>
+				<imageExpression><![CDATA["D:\\Logo Perusahaan\\s_212525_logosurya1.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="120" y="43" width="435" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Cambria Math" size="12"/>
+				</textElement>
+				<text><![CDATA[Penjualan dan Penyewaan Mesin Foto Copy dan Perlengkapannya]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="120" y="63" width="435" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Cambria Math" size="12"/>
+				</textElement>
+				<text><![CDATA[Alamat : Jl Rajawali Kompl Taman Rajawali Bl III/7]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="94" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="1.75"/>
+				</graphicElement>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="34" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="29"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Cambria Math" size="18"/>
+				</textElement>
+				<text><![CDATA[Laporan Pelanggan]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="27" splitType="Stretch">
+			<staticText>
+				<reportElement style="HeaderStyle" x="0" y="7" width="44" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="HeaderStyle" x="44" y="7" width="118" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Nama]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="HeaderStyle" x="162" y="7" width="71" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[J. Kelamin]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="HeaderStyle" x="233" y="7" width="222" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Alamat]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="HeaderStyle" x="455" y="7" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[No KTP]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="RecordStyle" x="0" y="0" width="44" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{pelanggan_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="RecordStyle" x="44" y="0" width="118" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{pelanggan_nama}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="RecordStyle" x="162" y="0" width="71" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{pelanggan_jenis_kelamin}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="RecordStyle" x="233" y="0" width="222" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{pelanggan_alamat}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="RecordStyle" x="455" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{pelanggan_no_ktp}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="9" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="11" splitType="Stretch"/>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="114">
+			<staticText>
+				<reportElement x="0" y="85" width="175" height="29"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Cambria Math" size="12"/>
+				</textElement>
+				<text><![CDATA[(                                                    )]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="175" height="29"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Cambria Math" size="12"/>
+				</textElement>
+				<text><![CDATA[Dibuat Oleh :]]></text>
+			</staticText>
+		</band>
+	</lastPageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

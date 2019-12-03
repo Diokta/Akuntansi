@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Laporan Neraca Saldo" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="HeaderStyle" mode="Opaque" backcolor="#CCCCCC" fill="Solid" fontName="Cambria Math" fontSize="12">
+		<pen lineWidth="0.5" lineColor="#000000"/>
+		<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+			<topPen lineWidth="0.75" lineColor="#999999"/>
+			<leftPen lineWidth="0.75" lineColor="#999999"/>
+			<bottomPen lineWidth="0.75" lineColor="#999999"/>
+			<rightPen lineWidth="0.75" lineColor="#999999"/>
+		</box>
+	</style>
+	<style name="RecordStyle" hAlign="Left" vAlign="Middle" fontName="Cambria Math" fontSize="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false">
+		<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+			<topPen lineWidth="0.25" lineColor="#CCCCCC"/>
+			<leftPen lineWidth="0.25" lineColor="#CCCCCC"/>
+			<bottomPen lineWidth="0.25" lineColor="#CCCCCC"/>
+			<rightPen lineWidth="0.25" lineColor="#CCCCCC"/>
+		</box>
+		<paragraph leftIndent="5" rightIndent="5"/>
+	</style>
+	<parameter name="TAHUN" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     buku_besar.`tanggal` AS buku_besar_tanggal,
+     buku_besar.`keterangan` AS buku_besar_keterangan,
+     buku_besar.`ref` AS buku_besar_ref,
+     buku_besar.`nama_akun` AS buku_besar_nama_akun,
+     buku_besar.`sort` AS buku_besar_sort,
+     buku_besar.`normal` AS buku_besar_normal,
+     buku_besar.`debit` AS buku_besar_debit,
+     buku_besar.`kredit` AS buku_besar_kredit
+FROM
+     `buku_besar` buku_besar
+WHERE
+     YEAR(buku_besar.tanggal)=$P{TAHUN}
+ORDER BY
+     buku_besar.sort, buku_besar.tanggal]]>
+	</queryString>
+	<field name="buku_besar_tanggal" class="java.sql.Date"/>
+	<field name="buku_besar_keterangan" class="java.lang.String"/>
+	<field name="buku_besar_ref" class="java.lang.String"/>
+	<field name="buku_besar_nama_akun" class="java.lang.String"/>
+	<field name="buku_besar_sort" class="java.lang.Integer"/>
+	<field name="buku_besar_normal" class="java.lang.String"/>
+	<field name="buku_besar_debit" class="java.lang.Long"/>
+	<field name="buku_besar_kredit" class="java.lang.Long"/>
+	<variable name="TOTAL_DEBIT" class="java.lang.Number" resetType="Group" resetGroup="nama akun" calculation="Sum">
+		<variableExpression><![CDATA[$F{buku_besar_debit}]]></variableExpression>
+	</variable>
+	<variable name="TOTAL_KREDIT" class="java.lang.Number" resetType="Group" resetGroup="nama akun" calculation="Sum">
+		<variableExpression><![CDATA[$F{buku_besar_kredit}]]></variableExpression>
+	</variable>
+	<variable name="SUM_TOT_DEBIT" class="java.lang.Number" incrementType="Group" incrementGroup="nama akun" calculation="Sum">
+		<variableExpression><![CDATA[$V{TOTAL_DEBIT}]]></variableExpression>
+	</variable>
+	<variable name="SUM_TOT_KREDIT" class="java.lang.Number" incrementType="Group" incrementGroup="nama akun" calculation="Sum">
+		<variableExpression><![CDATA[$V{TOTAL_KREDIT}]]></variableExpression>
+	</variable>
+	<group name="nama akun">
+		<groupExpression><![CDATA[$F{buku_besar_nama_akun}]]></groupExpression>
+		<groupFooter>
+			<band height="21">
+				<textField pattern="#,##0">
+					<reportElement style="RecordStyle" x="306" y="0" width="100" height="21"/>
+					<textElement textAlignment="Right">
+						<font isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{TOTAL_DEBIT}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0">
+					<reportElement style="RecordStyle" x="406" y="0" width="100" height="21"/>
+					<textElement textAlignment="Right">
+						<font isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{TOTAL_KREDIT}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="RecordStyle" x="56" y="0" width="250" height="21"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{buku_besar_nama_akun}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="103" splitType="Stretch">
+			<staticText>
+				<reportElement x="120" y="43" width="435" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Cambria Math" size="12"/>
+				</textElement>
+				<text><![CDATA[Penjualan dan Penyewaan Mesin Foto Copy dan Perlengkapannya]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="120" y="0" width="435" height="43"/>
+				<textElement>
+					<font fontName="Cambria Math" size="30"/>
+				</textElement>
+				<text><![CDATA[CV. Surya Printindo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="120" y="63" width="435" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Cambria Math" size="12"/>
+				</textElement>
+				<text><![CDATA[Alamat : Jl Rajawali Kompl Taman Rajawali Bl III/7]]></text>
+			</staticText>
+			<image>
+				<reportElement x="32" y="0" width="88" height="84"/>
+				<imageExpression><![CDATA["D:\\Logo Perusahaan\\s_212525_logosurya1.jpg"]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="0" y="95" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="1.75"/>
+				</graphicElement>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="54" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Cambria Math" size="18"/>
+				</textElement>
+				<text><![CDATA[Laporan Neraca Saldo]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="28" width="555" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Cambria Math" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Periode Tahun " + $P{TAHUN}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement style="HeaderStyle" x="56" y="0" width="250" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Nama Akun]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="HeaderStyle" x="306" y="0" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Debit]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="HeaderStyle" x="406" y="0" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Kredit]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<columnFooter>
+		<band height="22" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="31" splitType="Stretch"/>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="145">
+			<staticText>
+				<reportElement x="56" y="11" width="175" height="29"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Cambria Math" size="12"/>
+				</textElement>
+				<text><![CDATA[Dibuat Oleh :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="56" y="96" width="175" height="29"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Cambria Math" size="12"/>
+				</textElement>
+				<text><![CDATA[(                                                    )]]></text>
+			</staticText>
+		</band>
+	</lastPageFooter>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<textField pattern="#,##0">
+				<reportElement style="RecordStyle" x="306" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{SUM_TOT_DEBIT}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="RecordStyle" x="406" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{SUM_TOT_KREDIT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
