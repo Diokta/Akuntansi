@@ -79,7 +79,7 @@ public class AkunModel {
     }
 
     public boolean insert(Akun beban) {
-        String sql = "INSERT INTO beban (id, nama, keterangan) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO akun (id, nama, keterangan) VALUES (?, ?, ?)";
         PreparedStatement prepare = null;
         try {
             prepare = con.prepareStatement(sql);

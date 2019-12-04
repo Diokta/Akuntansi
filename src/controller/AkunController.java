@@ -44,7 +44,7 @@ public class AkunController {
         akunView.getKeteranganField().setText(akun.getKeterangan());
     }
 
-    private Akun createBeban() {
+    private Akun createAkun() {
         akun = new Akun(akunView.getIdField().getText(), akunView.getNamaField().getText(), akunView.getKeteranganField().getText());
         return akun;
     }
@@ -64,7 +64,7 @@ public class AkunController {
 
     public void saveOrNew() {
         if (!isEmptyField()) {
-            if (akunModel.insert(createBeban())) {
+            if (akunModel.insert(createAkun())) {
                 refreshBebanTable();
                 resetData();
                 JOptionPane.showMessageDialog(akunView, "Insert Data Beban Sukses.");
@@ -76,7 +76,7 @@ public class AkunController {
 
     public void saveOrUpdate() {
         if (!isEmptyField()) {
-            if (akunModel.update(createBeban())) {
+            if (akunModel.update(createAkun())) {
                 refreshBebanTable();
                 resetData();
                 JOptionPane.showMessageDialog(akunView, "Update Data Beban Sukses.");
@@ -120,7 +120,6 @@ public class AkunController {
             if (number.length() > 4) {
                 number = number.substring(number.length() - 4, number.length());
             }
-            number = number;
         }
         return number;
     }
