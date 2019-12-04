@@ -5,11 +5,11 @@
  */
 package view;
 
-import controller.AdminController;
+import controller.PerusahaanController;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import model.AdminModel;
+import model.PerusahaanModel;
 
 /**
  *
@@ -24,8 +24,8 @@ public class LoginView extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        adminModel = new AdminModel();
-        adminController = new AdminController(adminModel, this, menuUtama);
+        perusahaanModel = new PerusahaanModel();
+        perusahaanController = new PerusahaanController(perusahaanModel, this, menuUtama);
     }
 
     public JButton getBaruButton() {
@@ -124,18 +124,18 @@ public class LoginView extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void baruButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_baruButtonActionPerformed
-        adminController.loginAdmin();
+        perusahaanController.loginPerusahaan();
     }//GEN-LAST:event_baruButtonActionPerformed
 
     private void usernameFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_usernameFieldKeyReleased
         if (evt.getKeyCode() == 10) {
-            adminController.loginAdmin();
+            perusahaanController.loginPerusahaan();
         }
     }//GEN-LAST:event_usernameFieldKeyReleased
 
     private void passwordFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordFieldKeyReleased
         if (evt.getKeyCode() == 10) {
-            adminController.loginAdmin();
+            perusahaanController.loginPerusahaan();
         }
     }//GEN-LAST:event_passwordFieldKeyReleased
 
@@ -146,6 +146,6 @@ public class LoginView extends javax.swing.JDialog {
     private javax.swing.JPasswordField passwordField;
     private javax.swing.JTextField usernameField;
     // End of variables declaration//GEN-END:variables
-    private AdminModel adminModel;
-    private AdminController adminController;
+    private PerusahaanModel perusahaanModel;
+    private PerusahaanController perusahaanController;
 }

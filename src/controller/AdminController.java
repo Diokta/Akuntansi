@@ -250,7 +250,7 @@ public class AdminController {
                 if (loginView.getUsernameField().getText().equals(admin.getUsername())
                         && String.valueOf(loginView.getPasswordField().getPassword()).equals(admin.getPassword())) {
                     loginView.dispose();
-                    menuUtama.setActive(admin.getLevel());
+                    menuUtama.setActive();
                 } else {
                     JOptionPane.showMessageDialog(loginView, "Nama Perusahaan / Password Anda Tidak Cocok");
                 }

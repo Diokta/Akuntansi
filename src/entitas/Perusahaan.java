@@ -24,7 +24,8 @@ public class Perusahaan {
     private String password;
     private int periode;
 
-    public Perusahaan(String id, String nama, String email, String noTelp, String alamat, int thnBuku, int blnAkhir, int blnAwal, String password, int periode) {
+    public Perusahaan(String id, String nama, String email, String noTelp, String alamat, 
+            int thnBuku, int blnAkhir, int blnAwal, int periode, String password) {
         this.id = id;
         this.nama = nama;
         this.email = email;
@@ -33,8 +34,8 @@ public class Perusahaan {
         this.thnBuku = thnBuku;
         this.blnAkhir = blnAkhir;
         this.blnAwal = blnAwal;
-        this.password = password;
         this.periode = periode;
+        this.password = password;
     }
 
     public String getId() {
@@ -135,9 +136,9 @@ public class Perusahaan {
             case 7:
                 return blnAwal;
             case 8:
-                return password;
-            case 9:
                 return periode;
+            case 9:
+                return password;
             default:
                 return null;
         }
@@ -162,9 +163,9 @@ public class Perusahaan {
             case 7:
                 return blnAwal;
             case 8:
-                return password;
-            case 9:
                 return periode;
+            case 9:
+                return password;
             default:
                 return null;
         }

@@ -5,6 +5,7 @@
  */
 package controller;
 
+import Fadly.CustomComponents.component.DesktopPane;
 import entitas.Perusahaan;
 import java.awt.Font;
 import javax.swing.JOptionPane;
@@ -66,8 +67,9 @@ public class PerusahaanController {
         perusahaan = new Perusahaan(DaftarView.getId(), DaftarView.getNamaField().getText(),
                 DaftarView.getEmailField().getText(), DaftarView.getNoTelpField().getText(),
                 DaftarView.getAlamatField().getText(),Integer.parseInt(DaftarView.getThnBukuField().getSelectedItem().toString()),
-                DaftarView.getblnAkhirField().getSelectedIndex(), DaftarView.getblnAwalField().getSelectedIndex(), 
-                String.valueOf(DaftarView.getPasswordField().getPassword()), Integer.parseInt(DaftarView.getPeriodeField().getSelectedItem().toString()));
+                DaftarView.getblnAkhirField().getSelectedIndex()+1, DaftarView.getblnAwalField().getSelectedIndex()+1, 
+                Integer.parseInt(DaftarView.getPeriodeField().getSelectedItem().toString()),
+                String.valueOf(DaftarView.getPasswordField().getPassword()));
         return perusahaan;
     }
 
@@ -87,10 +89,10 @@ public class PerusahaanController {
     }
     
     private boolean isEmptyDaftarField() {
-        if (DaftarView == null) {
-            JOptionPane.showMessageDialog(DaftarView, "Null");
-            return true;
-        }
+//        if (DaftarView == null) {
+//            JOptionPane.showMessageDialog(DaftarView, "Null");
+//            return true;
+//        }
         
         boolean result = true;
         if (DaftarView.getNamaField().getText()== "") {
@@ -107,12 +109,16 @@ public class PerusahaanController {
     }
 
     public void saveOrNew() {
+        DaftarView.dispose();
+        this.id = perusahaan.getId();
+        menuUtama.setActive();
         if (!isEmptyDaftarField()) {
             if (perusahaanModel.insert(createPerusahaan())) {
 //                resetData();
-                JOptionPane.showMessageDialog(perusahaanView, "Insert Data Perusahaan Sukses.");
+                
+                JOptionPane.showMessageDialog(DaftarView, "Insert Data Perusahaan Sukses.");
             } else {
-                JOptionPane.showMessageDialog(perusahaanView, "Insert Data Perusahaan Gagal !!!");
+                JOptionPane.showMessageDialog(DaftarView, "Insert Data Perusahaan Gagal !!!");
             }
         }
     }
@@ -235,11 +241,11 @@ public class PerusahaanController {
         if (!loginView.getUsernameField().getText().isEmpty() && !loginView.getPasswordField().getPassword().toString().isEmpty()) {
             perusahaan = perusahaanModel.login(loginView.getUsernameField().getText());
             if (perusahaan != null) {
-                if (loginView.getUsernameField().getText().equals(perusahaan.getEmail())
+                if (loginView.getUsernameField().getText().equals(perusahaan.getNama())
                         && String.valueOf(loginView.getPasswordField().getPassword()).equals(perusahaan.getPassword())) {
                     loginView.dispose();
                     this.id = perusahaan.getId();
-                    menuUtama.setActive("Admin Keuangan");
+                    menuUtama.setActive();
                 } else {
                     JOptionPane.showMessageDialog(loginView, "Username / Password Anda Tidak Cocok");
                 }
