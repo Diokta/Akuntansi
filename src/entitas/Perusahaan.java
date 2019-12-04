@@ -18,19 +18,23 @@ public class Perusahaan {
     private String email;
     private String noTelp;
     private String alamat;
-    private Date tglMulai;
-    private Date tglAkhir;
+    private int thnBuku;
+    private int blnAkhir;
+    private int blnAwal;
     private String password;
+    private int periode;
 
-    public Perusahaan(String id, String nama, String email, String noTelp, String alamat, Date tglMulai, Date tglAkhir, String password) {
+    public Perusahaan(String id, String nama, String email, String noTelp, String alamat, int thnBuku, int blnAkhir, int blnAwal, String password, int periode) {
         this.id = id;
         this.nama = nama;
         this.email = email;
         this.noTelp = noTelp;
         this.alamat = alamat;
-        this.tglMulai = tglMulai;
-        this.tglAkhir = tglAkhir;
+        this.thnBuku = thnBuku;
+        this.blnAkhir = blnAkhir;
+        this.blnAwal = blnAwal;
         this.password = password;
+        this.periode = periode;
     }
 
     public String getId() {
@@ -53,16 +57,24 @@ public class Perusahaan {
         return alamat;
     }
     
-    public Date getTglMulai() {
-        return tglMulai;
+    public int getThnBuku() {
+        return thnBuku;
     }
     
-    public Date getTglAkhir() {
-        return tglAkhir;
+    public int getBlnAkhir() {
+        return blnAkhir;
+    }
+    
+    public int getBlnAwal() {
+        return blnAwal;
     }
     
     public String getPassword() {
         return password;
+    }
+    
+    public int getPeriode() {
+        return periode;
     }
 
     public void setId(String id) {
@@ -85,16 +97,23 @@ public class Perusahaan {
         this.alamat = alamat;
     }
 
-    public void setTglMulai(Date tglMulai) {
-        this.tglMulai = tglMulai;
+    public void setThnBuku(int thnBuku) {
+        this.thnBuku = thnBuku;
     }
 
-    public void setTglAkhir(Date tglAkhir) {
-        this.tglAkhir = tglAkhir;
+    public void setBlnAkhir(int blnAkhir) {
+        this.blnAkhir = blnAkhir;
+    }
+
+    public void setBlnAwal(int blnAwal) {
+        this.blnAwal = blnAwal;
     }
 
     public void setPassword(String password) {
         this.password = password;
+    }
+    public void setPeriode(int periode) {
+        this.periode = periode;
     }
 
     public Object getObject(int index) {
@@ -110,11 +129,15 @@ public class Perusahaan {
             case 4:
                 return alamat;
             case 5:
-                return tglMulai;
+                return thnBuku;
             case 6:
-                return tglAkhir;
+                return blnAkhir;
             case 7:
+                return blnAwal;
+            case 8:
                 return password;
+            case 9:
+                return periode;
             default:
                 return null;
         }
@@ -133,11 +156,15 @@ public class Perusahaan {
             case 4:
                 return alamat;
             case 5:
-                return tglMulai;
+                return thnBuku;
             case 6:
-                return tglAkhir;
+                return blnAkhir;
             case 7:
+                return blnAwal;
+            case 8:
                 return password;
+            case 9:
+                return periode;
             default:
                 return null;
         }

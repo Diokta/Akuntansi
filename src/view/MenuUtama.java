@@ -38,22 +38,21 @@ public class MenuUtama extends javax.swing.JFrame {
             produkSewaMenu.setEnabled(true);
             laporanMenu.setEnabled(true);
             loginMenu.setText("Logout Admin");
-            loginMenu2.setText("Logout");
+            loginMenu.setText("Logout");
         } else {
             masterMenu.setEnabled(true);
             adminMenu.setEnabled(false);
             biayaOperasionalMenu.setEnabled(false);
             produkSewaMenu.setEnabled(false);
             loginMenu.setText("Logout Admin");
-            loginMenu2.setText("Logout");
+            loginMenu.setText("Logout");
         }
     }
 
     private void deactive() {
         masterMenu.setEnabled(false);
         laporanMenu.setEnabled(false);
-        loginMenu.setText("Login Admin");
-        loginMenu2.setText("Login");
+        loginMenu.setText("Login");
     }
 
     /**
@@ -82,10 +81,9 @@ public class MenuUtama extends javax.swing.JFrame {
         jMenuItem13 = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
-        loginMenu2 = new javax.swing.JMenu();
-        loginMenu = new javax.swing.JMenuItem();
-        DaftarMenu2 = new javax.swing.JMenu();
-        DaftaMenu = new javax.swing.JMenuItem();
+        loginMenu = new javax.swing.JMenu();
+        daftarMenu = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistem Informasi Akuntansi Pendapatan Jasa dan Biaya Operasional Pada CV. Surya Printindo");
@@ -201,24 +199,25 @@ public class MenuUtama extends javax.swing.JFrame {
 
         jMenuBar1.add(laporanMenu);
 
-        loginMenu2.setText("Login");
-
-        loginMenu.setText("Login Perusahaan");
-        loginMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loginMenuActionPerformed(evt);
+        loginMenu.setText("Login");
+        loginMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                loginMenuMouseClicked(evt);
             }
         });
-        loginMenu2.add(loginMenu);
+        jMenuBar1.add(loginMenu);
 
-        jMenuBar1.add(loginMenu2);
+        daftarMenu.setText("Daftar");
 
-        DaftarMenu2.setText("Daftar");
+        jMenuItem1.setText("jMenuItem1");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        daftarMenu.add(jMenuItem1);
 
-        DaftaMenu.setText("Daftar Perusahaan");
-        DaftarMenu2.add(DaftaMenu);
-
-        jMenuBar1.add(DaftarMenu2);
+        jMenuBar1.add(daftarMenu);
 
         setJMenuBar(jMenuBar1);
 
@@ -294,15 +293,6 @@ public class MenuUtama extends javax.swing.JFrame {
         av.setVisible(true);
     }//GEN-LAST:event_adminMenuActionPerformed
 
-    private void loginMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginMenuActionPerformed
-        if (loginMenu.getText().equals("Login Admin")) {
-            LoginView lv = new LoginView(this, true, this);
-            lv.setVisible(true);
-        } else {
-            deactive();
-        }
-    }//GEN-LAST:event_loginMenuActionPerformed
-
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
         PeriodeView pv = new PeriodeView(this, true, true);
         pv.setOption(4);
@@ -315,18 +305,40 @@ public class MenuUtama extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     private void TransaksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TransaksiActionPerformed
-        // TODO add your handling code here:
+        if (loginMenu.getText().equals("Login")) {
+            LoginView lv = new LoginView(this, true, this);
+            lv.setVisible(true);
+        } else {
+            deactive();
+        }
     }//GEN-LAST:event_TransaksiActionPerformed
 
+    private void loginMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginMenuMouseClicked
+        if (loginMenu.getText().equals("Login")) {
+            LoginView lv = new LoginView(this, true, this);
+            lv.setVisible(true);
+        } else {
+            deactive();
+        }
+    }//GEN-LAST:event_loginMenuMouseClicked
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        DaftarView dv = new DaftarView();
+        desktopPane.removeAll();
+        desktopPane.add(dv);
+        desktopPane.updateUI();
+        dv.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem DaftaMenu;
-    private javax.swing.JMenu DaftarMenu2;
     private javax.swing.JMenuItem Transaksi;
     private javax.swing.JMenuItem adminMenu;
     private javax.swing.JMenuItem akunMenu;
     private javax.swing.JMenuItem biayaOperasionalMenu;
+    private javax.swing.JMenu daftarMenu;
     private Fadly.CustomComponents.component.DesktopPane desktopPane;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem2;
@@ -336,8 +348,7 @@ public class MenuUtama extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JMenu laporanMenu;
-    private javax.swing.JMenuItem loginMenu;
-    private javax.swing.JMenu loginMenu2;
+    private javax.swing.JMenu loginMenu;
     private javax.swing.JMenu masterMenu;
     private javax.swing.JMenuItem produkSewaMenu;
     // End of variables declaration//GEN-END:variables

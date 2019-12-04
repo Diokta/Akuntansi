@@ -35,7 +35,23 @@ public class AdminView extends javax.swing.JInternalFrame {
     public JTable getAdminTable() {
         return adminTable;
     }
+    
+    public JTextField getIdField() {
+        return idField;
+    }
 
+    public JTextField getNamaLengkapField() {
+        return namaLengkapField;
+    }
+    
+    public JTextField getUsernameField() {
+        return usernameField;
+    }
+
+    public JPasswordField getPasswordField() {
+        return passwordField;
+    }
+    
     public JComboBox getLevelField() {
         return levelField;
     }
@@ -48,28 +64,12 @@ public class AdminView extends javax.swing.JInternalFrame {
         return hapusButton;
     }
 
-    public JTextField getIdField() {
-        return idField;
-    }
-
-    public JTextField getNamaLengkapField() {
-        return namaLengkapField;
-    }
-
-    public JPasswordField getPasswordField() {
-        return passwordField;
-    }
-
     public JButton getTambahButton() {
         return tambahButton;
     }
 
     public JButton getUpdateButton() {
         return updateButton;
-    }
-
-    public JTextField getUsernameField() {
-        return usernameField;
     }
 
     public AdminTableModel getAdminTableModel() {
