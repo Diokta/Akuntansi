@@ -25,7 +25,7 @@ public class ConnectionUtility {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             try {
-                connection = DriverManager.getConnection("jdbc:mysql://"+ ip + "/surya_printindo", "root", "");
+                connection = DriverManager.getConnection("jdbc:mysql://"+ ip + "/program_akuntansi", "root", "");
             } catch (SQLException ex) {
                 Logger.getLogger(ConnectionUtility.class.getName()).log(Level.SEVERE, null, ex);
             }

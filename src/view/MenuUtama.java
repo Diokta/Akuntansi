@@ -66,9 +66,11 @@ public class MenuUtama extends javax.swing.JFrame {
 
         desktopPane = new Fadly.CustomComponents.component.DesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
+        daftarMenu = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        loginMenu = new javax.swing.JMenu();
         masterMenu = new javax.swing.JMenu();
         adminMenu = new javax.swing.JMenuItem();
-        akunMenu = new javax.swing.JMenuItem();
         biayaOperasionalMenu = new javax.swing.JMenuItem();
         produkSewaMenu = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -81,14 +83,31 @@ public class MenuUtama extends javax.swing.JFrame {
         jMenuItem13 = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
-        loginMenu = new javax.swing.JMenu();
-        daftarMenu = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Sistem Informasi Akuntansi Pendapatan Jasa dan Biaya Operasional Pada CV. Surya Printindo");
+        setTitle("SIAK DIFAN");
 
-        desktopPane.setGambar(new java.io.File("E:\\wallpaper surya.jpg"));
+        desktopPane.setGambar(new java.io.File("E:\\Git_Repos\\program_akuntansi\\src\\resources\\Tulips.jpg"));
+
+        daftarMenu.setText("Daftar");
+
+        jMenuItem1.setText("Perusahaan");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        daftarMenu.add(jMenuItem1);
+
+        jMenuBar1.add(daftarMenu);
+
+        loginMenu.setText("Login");
+        loginMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                loginMenuMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(loginMenu);
 
         masterMenu.setText("Data Master");
         masterMenu.setEnabled(false);
@@ -100,9 +119,6 @@ public class MenuUtama extends javax.swing.JFrame {
             }
         });
         masterMenu.add(adminMenu);
-
-        akunMenu.setText("Akun");
-        masterMenu.add(akunMenu);
 
         biayaOperasionalMenu.setText("Biaya Operasional");
         biayaOperasionalMenu.addActionListener(new java.awt.event.ActionListener() {
@@ -199,26 +215,6 @@ public class MenuUtama extends javax.swing.JFrame {
 
         jMenuBar1.add(laporanMenu);
 
-        loginMenu.setText("Login");
-        loginMenu.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                loginMenuMouseClicked(evt);
-            }
-        });
-        jMenuBar1.add(loginMenu);
-
-        daftarMenu.setText("Daftar");
-
-        jMenuItem1.setText("jMenuItem1");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        daftarMenu.add(jMenuItem1);
-
-        jMenuBar1.add(daftarMenu);
-
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -229,7 +225,7 @@ public class MenuUtama extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
+            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE)
         );
 
         pack();
@@ -333,7 +329,6 @@ public class MenuUtama extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem Transaksi;
     private javax.swing.JMenuItem adminMenu;
-    private javax.swing.JMenuItem akunMenu;
     private javax.swing.JMenuItem biayaOperasionalMenu;
     private javax.swing.JMenu daftarMenu;
     private Fadly.CustomComponents.component.DesktopPane desktopPane;
