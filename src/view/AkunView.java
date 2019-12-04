@@ -5,29 +5,31 @@
  */
 package view;
 
-import controller.BebanController;
+import controller.AkunController;
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import model.BebanModel;
+import model.AkunModel;
 import tablemodel.BebanTableModel;
 
 /**
  *
  * @author Fadli Hudaya
  */
-public class BebanView extends javax.swing.JInternalFrame {
+public class AkunView extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form BebanView
      */
-    public BebanView() {
+    public AkunView() {
         initComponents();
-        bebanModel = new BebanModel();
-        bebanController = new BebanController(this, bebanModel);
-        bebanController.refreshBebanTable();
-        bebanController.setAction();
+        bebanModel = new AkunModel();
+        akunController = new AkunController(this, bebanModel);
+        akunController.refreshBebanTable();
+        akunController.setAction();
         setLocation((1366 / 2) - (getWidth() / 2), (768 / 2) - (getHeight() / 2));
     }
 
@@ -36,7 +38,7 @@ public class BebanView extends javax.swing.JInternalFrame {
     }
 
     public JTable getBebanTable() {
-        return bebanTable;
+        return akunTable;
     }
 
     public JButton getHapusButton() {
@@ -71,6 +73,10 @@ public class BebanView extends javax.swing.JInternalFrame {
         return id;
     }
 
+    public JLabel getLabelAkun() {
+        return labelAkun;
+    }
+    
     public void setId(String id) {
         this.id = id;
     }
@@ -104,11 +110,11 @@ public class BebanView extends javax.swing.JInternalFrame {
         updateButton = new javax.swing.JButton();
         hapusButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        bebanTable = new javax.swing.JTable();
+        akunTable = new javax.swing.JTable();
 
         setClosable(true);
         setIconifiable(true);
-        setTitle("Biaya Operasional");
+        setTitle("Akun");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204))));
 
@@ -145,7 +151,7 @@ public class BebanView extends javax.swing.JInternalFrame {
         jLabel3.setFont(new java.awt.Font("Gill Sans MT", 0, 13)); // NOI18N
         jLabel3.setText("Jenis Akun :");
 
-        labelAkun.setText("jLabel5");
+        labelAkun.setText("Belum Pilih Akun");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -158,8 +164,8 @@ public class BebanView extends javax.swing.JInternalFrame {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(labelAkun)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(idField, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(idField))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
@@ -181,14 +187,15 @@ public class BebanView extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
+                    .addComponent(jLabel3))
                 .addGap(5, 5, 5)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(idField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelAkun, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelAkun, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(idField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -237,8 +244,8 @@ public class BebanView extends javax.swing.JInternalFrame {
             }
         });
 
-        bebanTable.setFont(new java.awt.Font("Gill Sans MT", 0, 13)); // NOI18N
-        bebanTable.setModel(new javax.swing.table.DefaultTableModel(
+        akunTable.setFont(new java.awt.Font("Gill Sans MT", 0, 13)); // NOI18N
+        akunTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -249,8 +256,8 @@ public class BebanView extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        bebanTable.setRowHeight(22);
-        jScrollPane1.setViewportView(bebanTable);
+        akunTable.setRowHeight(22);
+        jScrollPane1.setViewportView(akunTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -261,16 +268,16 @@ public class BebanView extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(baruButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(tambahButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(updateButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(hapusButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(hapusButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 24, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -289,7 +296,7 @@ public class BebanView extends javax.swing.JInternalFrame {
                     .addComponent(updateButton)
                     .addComponent(hapusButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -297,29 +304,39 @@ public class BebanView extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void baruButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_baruButtonActionPerformed
-        bebanController.newData();
+        if (getLabelAkun().getText().equals("Belum Pilih Akun")) {
+            JOptionPane.showMessageDialog(this, "Pilih jenis akun dahulu !!!");
+            return;
+        }
+        
+        akunController.newData();
     }//GEN-LAST:event_baruButtonActionPerformed
 
     private void tambahButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahButtonActionPerformed
-        bebanController.saveOrNew();
+        akunController.saveOrNew();
     }//GEN-LAST:event_tambahButtonActionPerformed
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
-        bebanController.updateData();
+        akunController.updateData();
     }//GEN-LAST:event_updateButtonActionPerformed
 
     private void hapusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusButtonActionPerformed
-        bebanController.saveOrDelete(id);
+        akunController.saveOrDelete(id);
     }//GEN-LAST:event_hapusButtonActionPerformed
 
     private void jComboBox2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox2ItemStateChanged
-        labelAkun.setText((jComboBox2.getSelectedIndex()+""));
+        int index = jComboBox2.getSelectedIndex();
+        if (index == 0) {
+            labelAkun.setText(("Belum Pilih Akun"));
+        } else {
+            labelAkun.setText((index+""));
+        }
     }//GEN-LAST:event_jComboBox2ItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable akunTable;
     private javax.swing.JButton baruButton;
-    private javax.swing.JTable bebanTable;
     private javax.swing.JButton hapusButton;
     private javax.swing.JTextField idField;
     private javax.swing.JComboBox<String> jComboBox2;
@@ -336,8 +353,8 @@ public class BebanView extends javax.swing.JInternalFrame {
     private javax.swing.JButton tambahButton;
     private javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables
-    private BebanModel bebanModel;
+    private AkunModel bebanModel;
     private BebanTableModel bebanTableModel;
     private String id = "";
-    private BebanController bebanController;
+    private AkunController akunController;
 }

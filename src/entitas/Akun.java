@@ -9,13 +9,13 @@ package entitas;
  *
  * @author Fadli Hudaya
  */
-public class Beban {
+public class Akun {
 
     private String id;
     private String nama;
     private String keterangan;
 
-    public Beban(String id, String nama, String keterangan) {
+    public Akun(String id, String nama, String keterangan) {
         this.id = id;
         this.nama = nama;
         this.keterangan = keterangan;

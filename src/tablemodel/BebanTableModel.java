@@ -5,7 +5,7 @@
  */
 package tablemodel;
 
-import entitas.Beban;
+import entitas.Akun;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -16,14 +16,14 @@ import javax.swing.table.AbstractTableModel;
  */
 public class BebanTableModel extends AbstractTableModel {
 
-    private List<Beban> list;
+    private List<Akun> list;
     private String[] header = {"ID", "Nama", "Keterangan"};
 
     public BebanTableModel() {
         list = new ArrayList<>();
     }
 
-    public void setListBeban(List<Beban> list) {
+    public void setListBeban(List<Akun> list) {
         this.list = list;
     }
 

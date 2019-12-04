@@ -5,14 +5,14 @@
  */
 package view;
 
-import controller.PerusahaanController;
+import controller.AdminController;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPasswordField;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import model.PerusahaanModel;
+import model.AdminModel;
 
 /**
  *
@@ -25,9 +25,10 @@ public class DaftarView extends javax.swing.JInternalFrame {
      */
     public DaftarView() {
         initComponents();
-        perusahaanModel = new PerusahaanModel();
-        perusahaanController = new PerusahaanController(this, perusahaanModel);
+        adminModel = new AdminModel();
+        adminController = new AdminController(this, adminModel);
         setLocation((1366 / 2) - (getWidth() / 2), (768 / 2) - (getHeight() / 2));
+        idField.setText(adminController.autoNumber());
     }
 
     public JTextField getIdField() {
@@ -132,7 +133,7 @@ public class DaftarView extends javax.swing.JInternalFrame {
         namaField.setFont(new java.awt.Font("Gill Sans MT", 0, 13)); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Gill Sans MT", 0, 13)); // NOI18N
-        jLabel2.setText("Nama Perusahan :");
+        jLabel2.setText("Nama Perusahaan :");
 
         jLabel4.setFont(new java.awt.Font("Gill Sans MT", 0, 13)); // NOI18N
         jLabel4.setText("Email :");
@@ -313,9 +314,9 @@ public class DaftarView extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void simpanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanButtonActionPerformed
-        this.id=perusahaanController.autoNumber();
+        this.id=adminController.autoNumber();
         System.out.println(id);
-        perusahaanController.saveOrNew();
+        adminController.saveOrNew();
     }//GEN-LAST:event_simpanButtonActionPerformed
 
 
@@ -345,6 +346,6 @@ public class DaftarView extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> thnBukuField;
     // End of variables declaration//GEN-END:variables
     private String id = "";
-    private PerusahaanModel perusahaanModel;
-    private PerusahaanController perusahaanController;
+    private AdminModel adminModel;
+    private AdminController adminController;
 }

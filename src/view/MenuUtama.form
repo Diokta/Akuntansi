@@ -43,7 +43,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="biayaOperasionalMenu">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Biaya Operasional"/>
+                <Property name="text" type="java.lang.String" value="Akun"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="biayaOperasionalMenuActionPerformed"/>

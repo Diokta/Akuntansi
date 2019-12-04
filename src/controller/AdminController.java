@@ -13,6 +13,7 @@ import javax.swing.event.ListSelectionListener;
 import model.AdminModel;
 import tablemodel.AdminTableModel;
 import view.AdminView;
+import view.DaftarView;
 import view.LoginView;
 import view.MenuUtama;
 
@@ -27,9 +28,15 @@ public class AdminController {
     private LoginView loginView;
     private MenuUtama menuUtama;
     private Admin admin;
+    private DaftarView daftarView;
 
     public AdminController(AdminView adminView, AdminModel adminModel) {
         this.adminView = adminView;
+        this.adminModel = adminModel;
+    }
+    
+    public AdminController(DaftarView daftarView, AdminModel adminModel) {
+        this.daftarView = daftarView;
         this.adminModel = adminModel;
     }
 
@@ -57,22 +64,40 @@ public class AdminController {
     }
 
     private Admin createAdmin() {
-        admin = new Admin(adminView.getIdField().getText(), adminView.getNamaLengkapField().getText(),
+        if (adminView != null) {
+            admin = new Admin(adminView.getIdField().getText(), adminView.getNamaLengkapField().getText(),
                 adminView.getUsernameField().getText(), String.valueOf(adminView.getPasswordField().getPassword()),
                 adminView.getLevelField().getSelectedItem().toString());
+        } else {
+            admin = new Admin(daftarView.getIdField().getText(), daftarView.getNamaField().getText(),
+                daftarView.getNamaField().getText(), String.valueOf(daftarView.getPasswordField().getPassword()),
+                "Admin Keuangan");
+        }
+        
         return admin;
     }
 
     private boolean isEmptyField() {
         boolean result = true;
-        if (adminView.getNamaLengkapField().getText().isEmpty()) {
-            JOptionPane.showMessageDialog(adminView, "Nama lengkap Masih Kosong !!!");
-        } else if (adminView.getUsernameField().getText().isEmpty()) {
-            JOptionPane.showMessageDialog(adminView, "Username Masih Kosong !!!");
-        } else if (adminView.getPasswordField().getText().isEmpty()) {
-            JOptionPane.showMessageDialog(adminView, "Password Masih Kosong !!!");
-        } else {
-            result = false;
+        
+        if (adminView != null) {
+            if (adminView.getNamaLengkapField().getText().isEmpty()) {
+                JOptionPane.showMessageDialog(adminView, "Nama lengkap Masih Kosong !!!");
+            } else if (adminView.getUsernameField().getText().isEmpty()) {
+                JOptionPane.showMessageDialog(adminView, "Nama Perusahaan Masih Kosong !!!");
+            } else if (adminView.getPasswordField().getText().isEmpty()) {
+                JOptionPane.showMessageDialog(adminView, "Password Masih Kosong !!!");
+            } else {
+                result = false;
+            }
+        } else if (daftarView != null) {
+            if (daftarView.getNamaField().getText().isEmpty()) {
+                JOptionPane.showMessageDialog(daftarView, "Nama Perusahaan Masih Kosong !!!");
+            } else if (daftarView.getPasswordField().getText().isEmpty()) {
+                JOptionPane.showMessageDialog(daftarView, "Password Masih Kosong !!!");
+            } else {
+                result = false;
+            }
         }
 
         return result;
@@ -80,12 +105,20 @@ public class AdminController {
 
     public void saveOrNew() {
         if (!isEmptyField()) {
-            if (adminModel.insert(createAdmin())) {
-                refreshAdminTable();
-                resetData();
-                JOptionPane.showMessageDialog(adminView, "Insert Data Admin Sukses.");
-            } else {
-                JOptionPane.showMessageDialog(adminView, "Insert Data Admin Gagal !!!");
+            if (adminView != null) {
+                if (adminModel.insert(createAdmin())) {
+                    refreshAdminTable();
+                    resetData();
+                    JOptionPane.showMessageDialog(adminView, "Insert Data Admin Sukses.");
+                } else {
+                    JOptionPane.showMessageDialog(adminView, "Insert Data Admin Gagal !!!");
+                }
+            } else if (daftarView != null) {
+                if (adminModel.insert(createAdmin())) {
+                    JOptionPane.showMessageDialog(daftarView, "Insert Data Admin Sukses.");
+                } else {
+                    JOptionPane.showMessageDialog(daftarView, "Insert Data Admin Gagal !!!");
+                }
             }
         }
     }
@@ -219,11 +252,11 @@ public class AdminController {
                     loginView.dispose();
                     menuUtama.setActive(admin.getLevel());
                 } else {
-                    JOptionPane.showMessageDialog(loginView, "Username / Password Anda Tidak Cocok");
+                    JOptionPane.showMessageDialog(loginView, "Nama Perusahaan / Password Anda Tidak Cocok");
                 }
             }
         } else {
-            JOptionPane.showMessageDialog(loginView, "Username / Password Anda Masih Kosong");
+            JOptionPane.showMessageDialog(loginView, "Nama Perusahaan / Password Anda Masih Kosong");
         }
     }
 }

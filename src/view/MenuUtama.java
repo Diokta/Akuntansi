@@ -120,7 +120,7 @@ public class MenuUtama extends javax.swing.JFrame {
         });
         masterMenu.add(adminMenu);
 
-        biayaOperasionalMenu.setText("Biaya Operasional");
+        biayaOperasionalMenu.setText("Akun");
         biayaOperasionalMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 biayaOperasionalMenuActionPerformed(evt);
@@ -248,7 +248,7 @@ public class MenuUtama extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void biayaOperasionalMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_biayaOperasionalMenuActionPerformed
-        BebanView bv = new BebanView();
+        AkunView bv = new AkunView();
         desktopPane.removeAll();
         desktopPane.updateUI();
         desktopPane.add(bv);
@@ -300,15 +300,6 @@ public class MenuUtama extends javax.swing.JFrame {
         pv.setVisible(true);
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
-    private void TransaksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TransaksiActionPerformed
-        if (loginMenu.getText().equals("Login")) {
-            LoginView lv = new LoginView(this, true, this);
-            lv.setVisible(true);
-        } else {
-            deactive();
-        }
-    }//GEN-LAST:event_TransaksiActionPerformed
-
     private void loginMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginMenuMouseClicked
         if (loginMenu.getText().equals("Login")) {
             LoginView lv = new LoginView(this, true, this);
@@ -325,6 +316,10 @@ public class MenuUtama extends javax.swing.JFrame {
         desktopPane.updateUI();
         dv.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void TransaksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TransaksiActionPerformed
+
+    }//GEN-LAST:event_TransaksiActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem Transaksi;

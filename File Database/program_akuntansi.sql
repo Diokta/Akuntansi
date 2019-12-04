@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 04 Des 2019 pada 11.05
--- Versi server: 10.4.8-MariaDB
--- Versi PHP: 7.3.11
+-- Generation Time: Dec 04, 2019 at 12:35 PM
+-- Server version: 10.4.8-MariaDB
+-- PHP Version: 7.3.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `admin`
+-- Table structure for table `admin`
 --
 
 CREATE TABLE `admin` (
@@ -33,33 +33,41 @@ CREATE TABLE `admin` (
   `nama_lengkap` varchar(30) NOT NULL,
   `username` varchar(20) NOT NULL,
   `password` varchar(20) NOT NULL,
-  `level` varchar(30) NOT NULL
+  `level` varchar(30) NOT NULL,
+  `email` varchar(35) DEFAULT NULL,
+  `telepon` varchar(20) DEFAULT NULL,
+  `alamat` text DEFAULT NULL,
+  `tahun_pembukuan` int(11) DEFAULT NULL,
+  `bulan_akhir_pembukuan` tinyint(4) DEFAULT NULL,
+  `bulan_awal_pembukuan` tinyint(4) DEFAULT NULL,
+  `periode_pembukuan` tinyint(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `admin`
+-- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`id`, `nama_lengkap`, `username`, `password`, `level`) VALUES
-('AD001', 'Difan', 'difan', 'difan', 'Admin Keuangan');
+INSERT INTO `admin` (`id`, `nama_lengkap`, `username`, `password`, `level`, `email`, `telepon`, `alamat`, `tahun_pembukuan`, `bulan_akhir_pembukuan`, `bulan_awal_pembukuan`, `periode_pembukuan`) VALUES
+('AD001', 'Difan', 'difan', 'difan', 'Admin Keuangan', 'difan@email.com', '12345678', 'Jalan Salemba Raya', 2019, 1, 1, 12),
+('AD002', 'test', 'test', '12345', 'Admin Keuangan', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `beban`
+-- Table structure for table `akun`
 --
 
-CREATE TABLE `beban` (
+CREATE TABLE `akun` (
   `id` varchar(4) NOT NULL,
   `nama` varchar(30) NOT NULL,
   `keterangan` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `beban`
+-- Dumping data for table `akun`
 --
 
-INSERT INTO `beban` (`id`, `nama`, `keterangan`) VALUES
+INSERT INTO `akun` (`id`, `nama`, `keterangan`) VALUES
 ('5001', 'Beban Air', 'Rekening Air'),
 ('5002', 'Beban Perlengkapan', 'Perlengkapan Kantor'),
 ('5003', 'Beban Listrik', 'Rekening Listrik'),
@@ -70,7 +78,7 @@ INSERT INTO `beban` (`id`, `nama`, `keterangan`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `buku_besar`
+-- Table structure for table `buku_besar`
 --
 
 CREATE TABLE `buku_besar` (
@@ -85,7 +93,7 @@ CREATE TABLE `buku_besar` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `buku_besar`
+-- Dumping data for table `buku_besar`
 --
 
 INSERT INTO `buku_besar` (`tanggal`, `keterangan`, `ref`, `nama_akun`, `sort`, `normal`, `debit`, `kredit`) VALUES
@@ -99,7 +107,7 @@ INSERT INTO `buku_besar` (`tanggal`, `keterangan`, `ref`, `nama_akun`, `sort`, `
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `jurnal`
+-- Table structure for table `jurnal`
 --
 
 CREATE TABLE `jurnal` (
@@ -114,7 +122,7 @@ CREATE TABLE `jurnal` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `jurnal`
+-- Dumping data for table `jurnal`
 --
 
 INSERT INTO `jurnal` (`tanggal`, `ref`, `keterangan`, `nama_akun`, `kelompok`, `normal`, `debit`, `kredit`) VALUES
@@ -128,7 +136,7 @@ INSERT INTO `jurnal` (`tanggal`, `ref`, `keterangan`, `nama_akun`, `kelompok`, `
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `laba_rugi`
+-- Table structure for table `laba_rugi`
 --
 
 CREATE TABLE `laba_rugi` (
@@ -140,7 +148,7 @@ CREATE TABLE `laba_rugi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `laba_rugi`
+-- Dumping data for table `laba_rugi`
 --
 
 INSERT INTO `laba_rugi` (`ref`, `tanggal`, `kelompok`, `nama_akun`, `nominal`) VALUES
@@ -151,7 +159,7 @@ INSERT INTO `laba_rugi` (`ref`, `tanggal`, `kelompok`, `nama_akun`, `nominal`) V
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pelanggan`
+-- Table structure for table `pelanggan`
 --
 
 CREATE TABLE `pelanggan` (
@@ -163,7 +171,7 @@ CREATE TABLE `pelanggan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `pelanggan`
+-- Dumping data for table `pelanggan`
 --
 
 INSERT INTO `pelanggan` (`id`, `nama`, `jenis_kelamin`, `alamat`, `no_ktp`) VALUES
@@ -173,7 +181,7 @@ INSERT INTO `pelanggan` (`id`, `nama`, `jenis_kelamin`, `alamat`, `no_ktp`) VALU
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pembayaran_beban`
+-- Table structure for table `pembayaran_beban`
 --
 
 CREATE TABLE `pembayaran_beban` (
@@ -185,7 +193,7 @@ CREATE TABLE `pembayaran_beban` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `pembayaran_beban`
+-- Dumping data for table `pembayaran_beban`
 --
 
 INSERT INTO `pembayaran_beban` (`id`, `tanggal`, `id_beban`, `nominal`, `keterangan`) VALUES
@@ -195,7 +203,7 @@ INSERT INTO `pembayaran_beban` (`id`, `tanggal`, `id_beban`, `nominal`, `keteran
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pengembalian`
+-- Table structure for table `pengembalian`
 --
 
 CREATE TABLE `pengembalian` (
@@ -209,7 +217,7 @@ CREATE TABLE `pengembalian` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `penyewaan`
+-- Table structure for table `penyewaan`
 --
 
 CREATE TABLE `penyewaan` (
@@ -222,7 +230,7 @@ CREATE TABLE `penyewaan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `penyewaan`
+-- Dumping data for table `penyewaan`
 --
 
 INSERT INTO `penyewaan` (`no_faktur`, `tanggal`, `id_pelanggan`, `id_produk_sewa`, `lama_sewa`, `total`) VALUES
@@ -231,7 +239,7 @@ INSERT INTO `penyewaan` (`no_faktur`, `tanggal`, `id_pelanggan`, `id_produk_sewa
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `perusahaan`
+-- Table structure for table `perusahaan`
 --
 
 CREATE TABLE `perusahaan` (
@@ -249,7 +257,7 @@ CREATE TABLE `perusahaan` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `produk_sewa`
+-- Table structure for table `produk_sewa`
 --
 
 CREATE TABLE `produk_sewa` (
@@ -260,7 +268,7 @@ CREATE TABLE `produk_sewa` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `produk_sewa`
+-- Dumping data for table `produk_sewa`
 --
 
 INSERT INTO `produk_sewa` (`id`, `nama`, `spesifikasi`, `harga_sewa`) VALUES
@@ -272,43 +280,43 @@ INSERT INTO `produk_sewa` (`id`, `nama`, `spesifikasi`, `harga_sewa`) VALUES
 --
 
 --
--- Indeks untuk tabel `admin`
+-- Indexes for table `admin`
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `beban`
+-- Indexes for table `akun`
 --
-ALTER TABLE `beban`
+ALTER TABLE `akun`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `pelanggan`
+-- Indexes for table `pelanggan`
 --
 ALTER TABLE `pelanggan`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `pembayaran_beban`
+-- Indexes for table `pembayaran_beban`
 --
 ALTER TABLE `pembayaran_beban`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `pengembalian`
+-- Indexes for table `pengembalian`
 --
 ALTER TABLE `pengembalian`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `penyewaan`
+-- Indexes for table `penyewaan`
 --
 ALTER TABLE `penyewaan`
   ADD PRIMARY KEY (`no_faktur`);
 
 --
--- Indeks untuk tabel `produk_sewa`
+-- Indexes for table `produk_sewa`
 --
 ALTER TABLE `produk_sewa`
   ADD PRIMARY KEY (`id`);

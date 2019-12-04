@@ -34,7 +34,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="usernameField" alignment="1" pref="266" max="32767" attributes="0"/>
+                          <Component id="usernameField" alignment="1" pref="222" max="32767" attributes="0"/>
                           <Component id="passwordField" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -77,7 +77,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Gill Sans MT" size="13" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Username :"/>
+        <Property name="text" type="java.lang.String" value="Nama Perusahaan :"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="usernameField">

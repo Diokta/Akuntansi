@@ -6,7 +6,7 @@
 package model;
 
 import connection.ConnectionUtility;
-import entitas.Beban;
+import entitas.Akun;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,24 +20,24 @@ import javax.swing.JOptionPane;
  *
  * @author Fadli
  */
-public class BebanModel {
+public class AkunModel {
 
     private Connection con;
-    private List<Beban> list;
+    private List<Akun> list;
 
-    public BebanModel() {
+    public AkunModel() {
         con = ConnectionUtility.getConnection();
         list = new ArrayList<>();
     }
 
-    public List<Beban> getAll() {
+    public List<Akun> getAll() {
         try {
-            String sql = "SELECT * FROM beban";
+            String sql = "SELECT * FROM akun";
             Statement statement = con.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             list = new ArrayList<>();
             while (resultSet.next()) {
-                Beban beban = new Beban(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3));
+                Akun beban = new Akun(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3));
                 list.add(beban);
             }
         } catch (SQLException ex) {
@@ -46,16 +46,16 @@ public class BebanModel {
         return list;
     }
 
-    public Beban getBeban(String id) {
-        Beban beban = null;
+    public Akun getBeban(String id) {
+        Akun beban = null;
         try {
-            String sql = "SELECT * FROM beban WHERE id=?";
+            String sql = "SELECT * FROM akun WHERE id=?";
             PreparedStatement prepare = con.prepareStatement(sql);
             prepare.setString(1, id);
             ResultSet resultSet = prepare.executeQuery();
             list = new ArrayList<>();
             while (resultSet.next()) {
-                beban = new Beban(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3));
+                beban = new Akun(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3));
             }
         } catch (SQLException ex) {
             System.out.println("" + ex);
@@ -63,9 +63,9 @@ public class BebanModel {
         return beban;
     }
 
-    public String getId() {
+    public String getId(String prefixId) {
         String id = "";
-        String sql = "SELECT id FROM beban ORDER BY id DESC";
+        String sql = "SELECT id FROM akun WHERE id LIKE '"+prefixId+"%' ORDER BY id DESC";
         try {
             Statement statement = con.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
@@ -78,7 +78,7 @@ public class BebanModel {
         return id;
     }
 
-    public boolean insert(Beban beban) {
+    public boolean insert(Akun beban) {
         String sql = "INSERT INTO beban (id, nama, keterangan) VALUES (?, ?, ?)";
         PreparedStatement prepare = null;
         try {
@@ -102,7 +102,7 @@ public class BebanModel {
         return true;
     }
 
-    public boolean update(Beban beban) {
+    public boolean update(Akun beban) {
         String sql = "UPDATE beban SET nama=?, keterangan=? WHERE id=?";
         PreparedStatement prepare = null;
         try {
@@ -128,7 +128,7 @@ public class BebanModel {
     }
 
     public boolean delete(String id) {
-        String sql = "DELETE FROM beban WHERE id=?";
+        String sql = "DELETE FROM akun WHERE id=?";
         PreparedStatement prepare = null;
         try {
             prepare = con.prepareStatement(sql);

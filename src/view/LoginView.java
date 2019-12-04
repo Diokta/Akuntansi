@@ -61,7 +61,7 @@ public class LoginView extends javax.swing.JDialog {
         jLabel5.setText("Password :");
 
         jLabel4.setFont(new java.awt.Font("Gill Sans MT", 0, 13)); // NOI18N
-        jLabel4.setText("Username :");
+        jLabel4.setText("Nama Perusahaan :");
 
         usernameField.setFont(new java.awt.Font("Gill Sans MT", 0, 13)); // NOI18N
         usernameField.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -100,7 +100,7 @@ public class LoginView extends javax.swing.JDialog {
                             .addComponent(jLabel5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(usernameField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
+                            .addComponent(usernameField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
                             .addComponent(passwordField))))
                 .addContainerGap())
         );
