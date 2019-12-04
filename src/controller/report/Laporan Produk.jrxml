@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Laporan Produk" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="HeaderStyle" mode="Opaque" backcolor="#CCCCCC" fill="Solid" fontName="Cambria Math" fontSize="12">
+		<pen lineWidth="0.5" lineColor="#000000"/>
+		<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+			<topPen lineWidth="0.75" lineColor="#999999"/>
+			<leftPen lineWidth="0.75" lineColor="#999999"/>
+			<bottomPen lineWidth="0.75" lineColor="#999999"/>
+			<rightPen lineWidth="0.75" lineColor="#999999"/>
+		</box>
+	</style>
+	<style name="RecordStyle" hAlign="Left" vAlign="Middle" fontName="Cambria Math" fontSize="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false">
+		<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+			<topPen lineWidth="0.25" lineColor="#CCCCCC"/>
+			<leftPen lineWidth="0.25" lineColor="#CCCCCC"/>
+			<bottomPen lineWidth="0.25" lineColor="#CCCCCC"/>
+			<rightPen lineWidth="0.25" lineColor="#CCCCCC"/>
+		</box>
+		<paragraph leftIndent="5" rightIndent="5"/>
+	</style>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     produk_sewa.`id` AS produk_sewa_id,
+     produk_sewa.`nama` AS produk_sewa_nama,
+     produk_sewa.`spesifikasi` AS produk_sewa_spesifikasi,
+     produk_sewa.`harga_sewa` AS produk_sewa_harga_sewa
+FROM
+     `produk_sewa` produk_sewa]]>
+	</queryString>
+	<field name="produk_sewa_id" class="java.lang.String"/>
+	<field name="produk_sewa_nama" class="java.lang.String"/>
+	<field name="produk_sewa_spesifikasi" class="java.lang.String"/>
+	<field name="produk_sewa_harga_sewa" class="java.lang.Long"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="102" splitType="Stretch">
+			<staticText>
+				<reportElement x="120" y="63" width="435" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Cambria Math" size="12"/>
+				</textElement>
+				<text><![CDATA[Alamat : Jl Rajawali Kompl Taman Rajawali Bl III/7]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="94" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="1.75"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="120" y="43" width="435" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Cambria Math" size="12"/>
+				</textElement>
+				<text><![CDATA[Penjualan dan Penyewaan Mesin Foto Copy dan Perlengkapannya]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="120" y="0" width="435" height="43"/>
+				<textElement>
+					<font fontName="Cambria Math" size="30"/>
+				</textElement>
+				<text><![CDATA[CV. Surya Printindo]]></text>
+			</staticText>
+			<image>
+				<reportElement x="32" y="0" width="88" height="84"/>
+				<imageExpression><![CDATA["D:\\Logo Perusahaan\\s_212525_logosurya1.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="33" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="29"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Cambria Math" size="18"/>
+				</textElement>
+				<text><![CDATA[Laporan Produk]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="31" splitType="Stretch">
+			<staticText>
+				<reportElement style="HeaderStyle" x="0" y="11" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[ID Produk]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="HeaderStyle" x="100" y="11" width="359" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Nama Produk]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="HeaderStyle" x="459" y="11" width="96" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Harga Sewa]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="40" splitType="Stretch">
+			<textField>
+				<reportElement style="RecordStyle" x="0" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{produk_sewa_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="RecordStyle" x="100" y="0" width="359" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{produk_sewa_nama}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="RecordStyle" x="0" y="20" width="555" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{produk_sewa_spesifikasi}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="RecordStyle" x="459" y="0" width="96" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{produk_sewa_harga_sewa}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="8" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="9" splitType="Stretch"/>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="140">
+			<staticText>
+				<reportElement x="0" y="85" width="175" height="29"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Cambria Math" size="12"/>
+				</textElement>
+				<text><![CDATA[(                                                    )]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="175" height="29"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Cambria Math" size="12"/>
+				</textElement>
+				<text><![CDATA[Dibuat Oleh :]]></text>
+			</staticText>
+		</band>
+	</lastPageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
