@@ -109,13 +109,10 @@ public class PerusahaanController {
     }
 
     public void saveOrNew() {
-        DaftarView.dispose();
-        this.id = perusahaan.getId();
-        menuUtama.setActive();
         if (!isEmptyDaftarField()) {
             if (perusahaanModel.insert(createPerusahaan())) {
 //                resetData();
-                
+                DaftarView.dispose();
                 JOptionPane.showMessageDialog(DaftarView, "Insert Data Perusahaan Sukses.");
             } else {
                 JOptionPane.showMessageDialog(DaftarView, "Insert Data Perusahaan Gagal !!!");
