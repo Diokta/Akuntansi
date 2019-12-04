@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Laporan Jurnal Umum" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ee2470e2-3100-4294-a944-34e32faba826">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Laporan Jurnal Umum" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ee2470e2-3100-4294-a944-34e32faba826">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -23,29 +23,31 @@
 	</style>
 	<parameter name="BULAN" class="java.lang.String"/>
 	<parameter name="TAHUN" class="java.lang.String"/>
+	<parameter name="NAMAPERUSAHAAN" class="java.lang.String"/>
+	<parameter name="ALAMATPERUSAHAAN" class="java.lang.String"/>
+	<parameter name="TELPPERUSAHAAN" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT
      jurnal.`tanggal` AS jurnal_tanggal,
-     jurnal.`ref` AS jurnal_ref,
-     jurnal.`keterangan` AS jurnal_keterangan,
-     jurnal.`debit` AS jurnal_debit,
-     jurnal.`kredit` AS jurnal_kredit
+     transaksi.`keterangan` AS transaksi_keterangan,
+     transaksi.`debit` AS transaksi_debit,
+     transaksi.`kredit` AS transaksi_kredit
 FROM
-     `jurnal` jurnal
+     `transaksi` transaksi, `jurnal` jurnal
 WHERE
+     transaksi.id_jurnal = jurnal.id AND
      MONTHNAME(jurnal.tanggal)=$P{BULAN} AND YEAR(jurnal.tanggal)=$P{TAHUN}]]>
 	</queryString>
 	<field name="jurnal_tanggal" class="java.sql.Date"/>
-	<field name="jurnal_ref" class="java.lang.String"/>
-	<field name="jurnal_keterangan" class="java.lang.String"/>
-	<field name="jurnal_debit" class="java.lang.Long"/>
-	<field name="jurnal_kredit" class="java.lang.Long"/>
+	<field name="transaksi_keterangan" class="java.lang.String"/>
+	<field name="transaksi_debit" class="java.lang.Long"/>
+	<field name="transaksi_kredit" class="java.lang.Long"/>
 	<variable name="TOTAL_DEBIT" class="java.lang.Number" calculation="Sum">
-		<variableExpression><![CDATA[$F{jurnal_debit}]]></variableExpression>
+		<variableExpression><![CDATA[$F{transaksi_debit}]]></variableExpression>
 		<initialValueExpression><![CDATA[]]></initialValueExpression>
 	</variable>
 	<variable name="TOTAL_KREDIT" class="java.lang.Number" calculation="Sum">
-		<variableExpression><![CDATA[$F{jurnal_kredit}]]></variableExpression>
+		<variableExpression><![CDATA[$F{transaksi_kredit}]]></variableExpression>
 	</variable>
 	<group name="jurnal_tanggal">
 		<groupExpression><![CDATA[$F{jurnal_tanggal}]]></groupExpression>
@@ -55,33 +57,33 @@ WHERE
 	</background>
 	<title>
 		<band height="102" splitType="Stretch">
-			<staticText>
+			<textField>
 				<reportElement x="120" y="43" width="435" height="20" uuid="c0f2926e-cfcc-4ad3-b112-c6028bcff41e"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Cambria Math" size="12"/>
 				</textElement>
-				<text><![CDATA[Penjualan dan Penyewaan Mesin Foto Copy dan Perlengkapannya]]></text>
-			</staticText>
-			<staticText>
+				<textFieldExpression><![CDATA["NO. TELP : " + $P{TELPPERUSAHAAN}]]></textFieldExpression>
+			</textField>
+			<textField>
 				<reportElement x="120" y="0" width="435" height="43" uuid="6d545fa1-f368-4c7b-abde-ac690ee09b66"/>
 				<textElement>
 					<font fontName="Cambria Math" size="30"/>
 				</textElement>
-				<text><![CDATA[CV. Surya Printindo]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA[$P{NAMAPERUSAHAAN}]]></textFieldExpression>
+			</textField>
 			<line>
 				<reportElement x="0" y="94" width="555" height="1" uuid="335053c1-baca-42e7-a1c6-538fe679a831"/>
 				<graphicElement>
 					<pen lineWidth="1.75"/>
 				</graphicElement>
 			</line>
-			<staticText>
+			<textField>
 				<reportElement x="120" y="63" width="435" height="20" uuid="0ffc13fe-879e-4a42-af65-b2d8a49dce59"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Cambria Math" size="12"/>
 				</textElement>
-				<text><![CDATA[Alamat : Jl Rajawali Kompl Taman Rajawali Bl III/7]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA["ALAMAT : " + $P{ALAMATPERUSAHAAN}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<pageHeader>
@@ -134,17 +136,18 @@ WHERE
 			</textField>
 			<textField>
 				<reportElement style="RecordStyle" x="100" y="0" width="283" height="20" uuid="6632dd84-7395-4c48-8b75-d22b6add2b7b"/>
-				<textFieldExpression><![CDATA[$F{jurnal_keterangan}]]></textFieldExpression>
+				<textElement markup="styled"/>
+				<textFieldExpression><![CDATA[$F{transaksi_kredit}.intValue() > 0 ? "       " + $F{transaksi_keterangan} : $F{transaksi_keterangan}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
 				<reportElement style="RecordStyle" x="383" y="0" width="86" height="20" uuid="703c16b0-1a53-4236-b267-a746810028ff"/>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA[$F{jurnal_debit}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{transaksi_debit}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
 				<reportElement style="RecordStyle" x="469" y="0" width="86" height="20" uuid="929827a9-ca42-4c55-838e-a26f27ce898c"/>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA[$F{jurnal_kredit}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{transaksi_kredit}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

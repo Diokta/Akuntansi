@@ -6,6 +6,7 @@
 package view;
 
 import controller.ReportController;
+import entitas.Perusahaan;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JMenu;
@@ -22,6 +23,8 @@ import org.jvnet.substance.skin.SubstanceRavenLookAndFeel;
  * @author Fadli Hudaya
  */
 public class MenuUtama extends javax.swing.JFrame {
+
+    public static Perusahaan DataPerusahaan;
 
     /**
      * Creates new form MenuUtama
@@ -311,7 +314,11 @@ public class MenuUtama extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     private void TransaksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TransaksiActionPerformed
-
+        TransaksiJurnalView tjv = new TransaksiJurnalView();
+        desktopPane.removeAll();
+        desktopPane.add(tjv);
+        desktopPane.updateUI();
+        tjv.setVisible(true);
     }//GEN-LAST:event_TransaksiActionPerformed
 
     private void loginMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginMenuMouseClicked

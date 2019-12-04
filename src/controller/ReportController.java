@@ -14,6 +14,7 @@ import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.view.JasperViewer;
+import view.MenuUtama;
 
 /**
  *
@@ -57,6 +58,10 @@ public class ReportController {
         map = new HashMap<>();
         map.put("BULAN", bulan);
         map.put("TAHUN", tahun);
+        map.put("NAMAPERUSAHAAN", MenuUtama.DataPerusahaan.getNama());
+        map.put("ALAMATPERUSAHAAN", MenuUtama.DataPerusahaan.getAlamat());        
+        map.put("TELPPERUSAHAAN", MenuUtama.DataPerusahaan.getNoTelp());
+
         try {
             JasperPrint jasperPrint = JasperFillManager.fillReport(stream, map, ConnectionUtility.getConnection());
             JasperViewer.viewReport(jasperPrint, false);
@@ -73,6 +78,10 @@ public class ReportController {
         map = new HashMap<>();
         map.put("BULAN", bulan);
         map.put("TAHUN", tahun);
+        map.put("NAMAPERUSAHAAN", MenuUtama.DataPerusahaan.getNama());
+        map.put("ALAMATPERUSAHAAN", MenuUtama.DataPerusahaan.getAlamat());        
+        map.put("TELPPERUSAHAAN", MenuUtama.DataPerusahaan.getNoTelp());
+        
         try {
             JasperPrint jasperPrint = JasperFillManager.fillReport(stream, map, ConnectionUtility.getConnection());
             JasperViewer.viewReport(jasperPrint, false);

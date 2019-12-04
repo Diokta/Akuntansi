@@ -119,6 +119,21 @@ public class TransaksiJurnalModel {
             return null;
         }
     }
+    
+    public String getNamaAkun(String id) {
+        String nama = "";
+        String sql = "SELECT nama FROM akun where id = '"+id+"'";
+        try {
+            Statement statement = con.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+            if (resultSet.next()) {
+                nama = resultSet.getString(1);
+            }
+            return nama;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
 
     public String getIdBeban(String nama) {
         String id = "";
@@ -155,8 +170,12 @@ public class TransaksiJurnalModel {
                 + "VALUES (?, ?, ?, ?, ?)";
         String sql3 = "INSERT INTO transaksi (id_akun, id_jurnal, debit, kredit, keterangan) "
                 + "VALUES (?, ?, ?, ?, ?)";
+        String sql4 = "INSERT INTO buku_besar (tanggal, ref, keterangan, nama_akun, sort, debit, kredit) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement prepare2 = null;
         PreparedStatement prepare3 = null;
+        PreparedStatement prepare4 = null;
+        PreparedStatement prepare5 = null;
         
         try {
             prepare2 = con.prepareStatement(sql2);
@@ -173,6 +192,8 @@ public class TransaksiJurnalModel {
         
         try {
             prepare3 = con.prepareStatement(sql3);
+            prepare4 = con.prepareStatement(sql4);
+            prepare5 = con.prepareStatement(sql4);
             con.setAutoCommit(false);
             
             prepare3.setObject(1, transaksi_jurnal.getId_akun());
@@ -180,8 +201,92 @@ public class TransaksiJurnalModel {
             prepare3.setObject(3, transaksi_jurnal.getDebit());
             prepare3.setObject(4, transaksi_jurnal.getKredit());
             prepare3.setObject(5, transaksi_jurnal.getKeterangan());
-
-            prepare3.executeUpdate();
+            
+            /*if (transaksi_jurnal.getId_akun().charAt(0) == '1') {
+                prepare4.setObject(1, transaksi_jurnal.getTanggal());
+                prepare4.setObject(2, transaksi_jurnal.getId_jurnal());
+                prepare4.setObject(3, transaksi_jurnal.getKeterangan());
+                prepare4.setObject(4, "Kas");
+                prepare4.setObject(5, 1);
+                prepare4.setObject(6, transaksi_jurnal.getDebit());
+                prepare4.setObject(7, 0);        
+                prepare4.executeUpdate();
+            } else */
+            if (transaksi_jurnal.getId_akun().charAt(0) == '2') {
+                prepare4.setObject(1, transaksi_jurnal.getTanggal());
+                prepare4.setObject(2, transaksi_jurnal.getId_jurnal());
+                prepare4.setObject(3, transaksi_jurnal.getKeterangan());
+                prepare4.setObject(4, "Kas");
+                prepare4.setObject(5, 1);
+                prepare4.setObject(6, transaksi_jurnal.getKredit());
+                prepare4.setObject(7, 0);
+                
+                prepare5.setObject(1, transaksi_jurnal.getTanggal());
+                prepare5.setObject(2, transaksi_jurnal.getId_jurnal());
+                prepare5.setObject(3, transaksi_jurnal.getKeterangan());
+                prepare5.setObject(4, getNamaAkun(transaksi_jurnal.getId_akun()));
+                prepare5.setObject(5, 2);
+                prepare5.setObject(6, 0);
+                prepare5.setObject(7, transaksi_jurnal.getKredit());          
+                prepare4.executeUpdate();
+                prepare5.executeUpdate();
+            } else if (transaksi_jurnal.getId_akun().charAt(0) == '3') {
+                prepare4.setObject(1, transaksi_jurnal.getTanggal());
+                prepare4.setObject(2, transaksi_jurnal.getId_jurnal());
+                prepare4.setObject(3, transaksi_jurnal.getKeterangan());
+                prepare4.setObject(4, "Kas");
+                prepare4.setObject(5, 1);
+                prepare4.setObject(6, transaksi_jurnal.getKredit());
+                prepare4.setObject(7, 0);
+                
+                prepare5.setObject(1, transaksi_jurnal.getTanggal());
+                prepare5.setObject(2, transaksi_jurnal.getId_jurnal());
+                prepare5.setObject(3, transaksi_jurnal.getKeterangan());
+                prepare5.setObject(4, getNamaAkun(transaksi_jurnal.getId_akun()));
+                prepare5.setObject(5, 2);
+                prepare5.setObject(6, 0);
+                prepare5.setObject(7, transaksi_jurnal.getKredit());          
+                prepare4.executeUpdate();
+                prepare5.executeUpdate();
+            } else if (transaksi_jurnal.getId_akun().charAt(0) == '4') {
+                prepare4.setObject(1, transaksi_jurnal.getTanggal());
+                prepare4.setObject(2, transaksi_jurnal.getId_jurnal());
+                prepare4.setObject(3, transaksi_jurnal.getKeterangan());
+                prepare4.setObject(4, "Kas");
+                prepare4.setObject(5, 1);
+                prepare4.setObject(6, 0);
+                prepare4.setObject(7, transaksi_jurnal.getKredit());
+                
+                prepare5.setObject(1, transaksi_jurnal.getTanggal());
+                prepare5.setObject(2, transaksi_jurnal.getId_jurnal());
+                prepare5.setObject(3, transaksi_jurnal.getKeterangan());
+                prepare5.setObject(4, getNamaAkun(transaksi_jurnal.getId_akun()));
+                prepare5.setObject(5, 2);
+                prepare5.setObject(6, 0);
+                prepare5.setObject(7, transaksi_jurnal.getKredit());          
+                prepare4.executeUpdate();
+                prepare5.executeUpdate();
+            } else if (transaksi_jurnal.getId_akun().charAt(0) == '5') {
+                prepare4.setObject(1, transaksi_jurnal.getTanggal());
+                prepare4.setObject(2, transaksi_jurnal.getId_jurnal());
+                prepare4.setObject(3, transaksi_jurnal.getKeterangan());
+                prepare4.setObject(4, "Kas");
+                prepare4.setObject(5, 1);
+                prepare4.setObject(6, 0);
+                prepare4.setObject(7, transaksi_jurnal.getDebit());
+                
+                prepare5.setObject(1, transaksi_jurnal.getTanggal());
+                prepare5.setObject(2, transaksi_jurnal.getId_jurnal());
+                prepare5.setObject(3, transaksi_jurnal.getKeterangan());
+                prepare5.setObject(4, getNamaAkun(transaksi_jurnal.getId_akun()));
+                prepare5.setObject(5, 2);
+                prepare5.setObject(6, transaksi_jurnal.getDebit());
+                prepare5.setObject(7, 0);          
+                prepare4.executeUpdate();
+                prepare5.executeUpdate();
+            }
+            
+            prepare3.executeUpdate();  
             con.commit();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error When Insert Data\n" + ex);

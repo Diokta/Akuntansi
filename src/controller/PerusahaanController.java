@@ -243,6 +243,7 @@ public class PerusahaanController {
                     loginView.dispose();
                     this.id = perusahaan.getId();
                     menuUtama.setActive();
+                    MenuUtama.DataPerusahaan = perusahaan;
                 } else {
                     JOptionPane.showMessageDialog(loginView, "Username / Password Anda Tidak Cocok");
                 }

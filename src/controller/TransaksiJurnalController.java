@@ -64,8 +64,6 @@ public class TransaksiJurnalController {
         boolean result = true;
         if (transaksiJurnalView.getTanggalField().getDate().toString().isEmpty()) {
             JOptionPane.showMessageDialog(transaksiJurnalView, "Tanggal Masih Kosong !!!");
-        } else if (transaksiJurnalView.getKeteranganField().getText().isEmpty()) {
-            JOptionPane.showMessageDialog(transaksiJurnalView, "Keterangan Masih Kosong !!!");
         } else {
             result = false;
         }
