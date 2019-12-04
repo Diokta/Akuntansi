@@ -68,6 +68,7 @@ public class MenuUtama extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         masterMenu = new javax.swing.JMenu();
         adminMenu = new javax.swing.JMenuItem();
+        akunMenu = new javax.swing.JMenuItem();
         biayaOperasionalMenu = new javax.swing.JMenuItem();
         produkSewaMenu = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -99,6 +100,9 @@ public class MenuUtama extends javax.swing.JFrame {
             }
         });
         masterMenu.add(adminMenu);
+
+        akunMenu.setText("Akun");
+        masterMenu.add(akunMenu);
 
         biayaOperasionalMenu.setText("Biaya Operasional");
         biayaOperasionalMenu.addActionListener(new java.awt.event.ActionListener() {
@@ -239,6 +243,14 @@ public class MenuUtama extends javax.swing.JFrame {
         sv.setVisible(true);
     }//GEN-LAST:event_produkSewaMenuActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        PelangganView pv = new PelangganView();
+        desktopPane.removeAll();
+        desktopPane.updateUI();
+        desktopPane.add(pv);
+        pv.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     private void biayaOperasionalMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_biayaOperasionalMenuActionPerformed
         BebanView bv = new BebanView();
         desktopPane.removeAll();
@@ -293,10 +305,12 @@ public class MenuUtama extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     private void TransaksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TransaksiActionPerformed
-        PenyewaanView pv = new PenyewaanView();
-        desktopPane.removeAll();
-        desktopPane.add(pv);
-        pv.setVisible(true);
+        if (loginMenu.getText().equals("Login")) {
+            LoginView lv = new LoginView(this, true, this);
+            lv.setVisible(true);
+        } else {
+            deactive();
+        }
     }//GEN-LAST:event_TransaksiActionPerformed
 
     private void loginMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginMenuMouseClicked
@@ -316,17 +330,10 @@ public class MenuUtama extends javax.swing.JFrame {
         dv.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        PelangganView pv = new PelangganView();
-        desktopPane.removeAll();
-        desktopPane.updateUI();
-        desktopPane.add(pv);
-        pv.setVisible(true);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem Transaksi;
     private javax.swing.JMenuItem adminMenu;
+    private javax.swing.JMenuItem akunMenu;
     private javax.swing.JMenuItem biayaOperasionalMenu;
     private javax.swing.JMenu daftarMenu;
     private Fadly.CustomComponents.component.DesktopPane desktopPane;
