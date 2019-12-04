@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 04, 2019 at 12:35 PM
+-- Generation Time: Dec 04, 2019 at 06:10 PM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -68,11 +68,11 @@ CREATE TABLE `akun` (
 --
 
 INSERT INTO `akun` (`id`, `nama`, `keterangan`) VALUES
+('1001', 'Kas', 'Kas Utama'),
 ('5001', 'Beban Air', 'Rekening Air'),
 ('5002', 'Beban Perlengkapan', 'Perlengkapan Kantor'),
 ('5003', 'Beban Listrik', 'Rekening Listrik'),
 ('5004', 'Beban Sewa', 'Sewa Gedung'),
-('5005', 'Beban Telepon', 'Rekening Telepon'),
 ('5006', 'Beban Iklan', 'Promosi');
 
 -- --------------------------------------------------------
@@ -111,27 +111,12 @@ INSERT INTO `buku_besar` (`tanggal`, `keterangan`, `ref`, `nama_akun`, `sort`, `
 --
 
 CREATE TABLE `jurnal` (
+  `id` varchar(4) NOT NULL,
   `tanggal` date NOT NULL,
-  `ref` varchar(10) NOT NULL,
   `keterangan` text NOT NULL,
-  `nama_akun` varchar(100) DEFAULT NULL,
-  `kelompok` varchar(20) DEFAULT NULL,
-  `normal` varchar(20) DEFAULT NULL,
   `debit` bigint(20) NOT NULL,
   `kredit` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `jurnal`
---
-
-INSERT INTO `jurnal` (`tanggal`, `ref`, `keterangan`, `nama_akun`, `kelompok`, `normal`, `debit`, `kredit`) VALUES
-('2015-05-19', 'PB001', 'Beban Perlengkapan', NULL, NULL, NULL, 130000, 0),
-('2015-05-19', 'PB001', '          Kas', NULL, NULL, NULL, 0, 130000),
-('2015-05-19', 'PE001', 'Kas', NULL, NULL, NULL, 660000, 0),
-('2015-05-19', 'PE001', '          Penyewaan Mesin FC Xerox FX 001 3 bulan', NULL, NULL, NULL, 0, 660000),
-('2015-05-19', 'PB002', 'Beban Iklan', NULL, NULL, NULL, 620000, 0),
-('2015-05-19', 'PB002', '          Kas', NULL, NULL, NULL, 0, 620000);
 
 -- --------------------------------------------------------
 
@@ -246,6 +231,7 @@ CREATE TABLE `perusahaan` (
   `id` varchar(10) NOT NULL,
   `nama` varchar(35) NOT NULL,
   `email` varchar(35) NOT NULL,
+  `password` varchar(20) NOT NULL,
   `telepon` varchar(20) NOT NULL,
   `alamat` text NOT NULL,
   `tahun_pembukuan` int(11) NOT NULL,
@@ -275,6 +261,21 @@ INSERT INTO `produk_sewa` (`id`, `nama`, `spesifikasi`, `harga_sewa`) VALUES
 ('PS001', 'Mesin FC Canon ICMF 3000', '- Copy, Print, Scan Color dan Simplex\n- Speed 18 Lembar per menit\n- Maksimal Ukuran Kertas A4', 250000),
 ('PS002', 'Mesin FC Xerox FX 001', '- Print, Scan\n- A4, Letter (HVS)\n- Ukuran 409 x 362 x 232mm\n- Berat 9.5 Kg\n- 400 Watt', 220000);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `transaksi`
+--
+
+CREATE TABLE `transaksi` (
+  `id` int(11) NOT NULL,
+  `id_akun` varchar(4) CHARACTER SET utf8 NOT NULL,
+  `id_jurnal` varchar(4) CHARACTER SET utf8 NOT NULL,
+  `debit` int(11) NOT NULL,
+  `kredit` int(11) NOT NULL,
+  `keterangan` text CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 --
 -- Indexes for dumped tables
 --
@@ -289,6 +290,12 @@ ALTER TABLE `admin`
 -- Indexes for table `akun`
 --
 ALTER TABLE `akun`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `jurnal`
+--
+ALTER TABLE `jurnal`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -320,6 +327,35 @@ ALTER TABLE `penyewaan`
 --
 ALTER TABLE `produk_sewa`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `transaksi`
+--
+ALTER TABLE `transaksi`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `akun_constraint` (`id_akun`),
+  ADD KEY `jurnal_constraint` (`id_jurnal`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `transaksi`
+--
+ALTER TABLE `transaksi`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `transaksi`
+--
+ALTER TABLE `transaksi`
+  ADD CONSTRAINT `akun_constraint` FOREIGN KEY (`id_akun`) REFERENCES `akun` (`id`),
+  ADD CONSTRAINT `jurnal_constraint` FOREIGN KEY (`id_jurnal`) REFERENCES `jurnal` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

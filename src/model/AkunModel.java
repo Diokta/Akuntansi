@@ -37,8 +37,8 @@ public class AkunModel {
             ResultSet resultSet = statement.executeQuery(sql);
             list = new ArrayList<>();
             while (resultSet.next()) {
-                Akun beban = new Akun(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3));
-                list.add(beban);
+                Akun akun = new Akun(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3));
+                list.add(akun);
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error When Retrieve Data\n" + ex);
@@ -46,8 +46,8 @@ public class AkunModel {
         return list;
     }
 
-    public Akun getBeban(String id) {
-        Akun beban = null;
+    public Akun getAkun(String id) {
+        Akun akun = null;
         try {
             String sql = "SELECT * FROM akun WHERE id=?";
             PreparedStatement prepare = con.prepareStatement(sql);
@@ -55,12 +55,12 @@ public class AkunModel {
             ResultSet resultSet = prepare.executeQuery();
             list = new ArrayList<>();
             while (resultSet.next()) {
-                beban = new Akun(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3));
+                akun = new Akun(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3));
             }
         } catch (SQLException ex) {
             System.out.println("" + ex);
         }
-        return beban;
+        return akun;
     }
 
     public String getId(String prefixId) {
@@ -78,14 +78,14 @@ public class AkunModel {
         return id;
     }
 
-    public boolean insert(Akun beban) {
+    public boolean insert(Akun akun) {
         String sql = "INSERT INTO akun (id, nama, keterangan) VALUES (?, ?, ?)";
         PreparedStatement prepare = null;
         try {
             prepare = con.prepareStatement(sql);
             con.setAutoCommit(false);
             for (int i = 0; i < 3; i++) {
-                prepare.setObject(i + 1, beban.getObject(i));
+                prepare.setObject(i + 1, akun.getObject(i));
             }
             prepare.executeUpdate();
             con.commit();
@@ -102,15 +102,15 @@ public class AkunModel {
         return true;
     }
 
-    public boolean update(Akun beban) {
-        String sql = "UPDATE beban SET nama=?, keterangan=? WHERE id=?";
+    public boolean update(Akun akun) {
+        String sql = "UPDATE akun SET nama=?, keterangan=? WHERE id=?";
         PreparedStatement prepare = null;
         try {
             prepare = con.prepareStatement(sql);
             con.setAutoCommit(false);
             for (int i = 1; i < 3; i++) {
-                prepare.setObject(i, beban.getObject(i));
-                prepare.setObject(3, beban.getId());
+                prepare.setObject(i, akun.getObject(i));
+                prepare.setObject(3, akun.getId());
             }
             prepare.executeUpdate();
             con.commit();

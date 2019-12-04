@@ -38,7 +38,7 @@ public class AkunController {
     }
 
     public void addValueComponent(String id) {
-        akun = akunModel.getBeban(id);
+        akun = akunModel.getAkun(id);
         akunView.getIdField().setText(akun.getId());
         akunView.getNamaField().setText(akun.getNama());
         akunView.getKeteranganField().setText(akun.getKeterangan());

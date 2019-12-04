@@ -318,7 +318,11 @@ public class MenuUtama extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void TransaksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TransaksiActionPerformed
-
+        TransaksiJurnalView tjv = new TransaksiJurnalView();
+        desktopPane.removeAll();
+        desktopPane.add(tjv);
+        desktopPane.updateUI();
+        tjv.setVisible(true);
     }//GEN-LAST:event_TransaksiActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
