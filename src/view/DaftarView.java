@@ -5,14 +5,15 @@
  */
 package view;
 
-import controller.AdminController;
+import Fadly.CustomComponents.component.DesktopPane;
+import controller.PerusahaanController;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPasswordField;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import model.AdminModel;
+import model.PerusahaanModel;
 
 /**
  *
@@ -25,10 +26,10 @@ public class DaftarView extends javax.swing.JInternalFrame {
      */
     public DaftarView() {
         initComponents();
-        adminModel = new AdminModel();
-        adminController = new AdminController(this, adminModel);
+        perusahaanModel = new PerusahaanModel();
+        perusahaanController = new PerusahaanController(this, perusahaanModel);
         setLocation((1366 / 2) - (getWidth() / 2), (768 / 2) - (getHeight() / 2));
-        idField.setText(adminController.autoNumber());
+        idField.setText(perusahaanController.autoNumber());
     }
 
     public JTextField getIdField() {
@@ -314,9 +315,8 @@ public class DaftarView extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void simpanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanButtonActionPerformed
-        this.id=adminController.autoNumber();
-        System.out.println(id);
-        adminController.saveOrNew();
+        this.id=perusahaanController.autoNumber();
+        perusahaanController.saveOrNew();
     }//GEN-LAST:event_simpanButtonActionPerformed
 
 
@@ -346,6 +346,7 @@ public class DaftarView extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> thnBukuField;
     // End of variables declaration//GEN-END:variables
     private String id = "";
-    private AdminModel adminModel;
-    private AdminController adminController;
+    private PerusahaanModel perusahaanModel;
+    private PerusahaanController perusahaanController;
+    private MenuUtama menuUtama;
 }

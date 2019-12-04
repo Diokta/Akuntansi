@@ -44,7 +44,7 @@ public class PerusahaanModel {
                 Perusahaan perusahaan = new Perusahaan(resultSet.getString(1), resultSet.getString(2), 
                         resultSet.getString(3), resultSet.getString(4), resultSet.getString(5),
                         resultSet.getInt(6), resultSet.getInt(7), resultSet.getInt(8), 
-                        resultSet.getString(9), resultSet.getInt(10));
+                        resultSet.getInt(9), resultSet.getString(10));
                 list.add(perusahaan);
             }
         } catch (SQLException ex) {
@@ -65,7 +65,7 @@ public class PerusahaanModel {
                 perusahaan = new Perusahaan(resultSet.getString(1), resultSet.getString(2), 
                         resultSet.getString(3), resultSet.getString(4), resultSet.getString(5),
                         resultSet.getInt(6), resultSet.getInt(7), resultSet.getInt(8), 
-                        resultSet.getString(9), resultSet.getInt(10));
+                        resultSet.getInt(9), resultSet.getString(10));
             }
         } catch (SQLException ex) {
             System.out.println("" + ex);
@@ -89,7 +89,8 @@ public class PerusahaanModel {
     }
 
     public boolean insert(Perusahaan perusahaan) {
-        String sql = "INSERT INTO perusahaan (id, nama, email, noTelp, alamat, thnBuku, blnAkhir, blnAwal, password, periode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO perusahaan (id, nama, email, telepon, alamat, tahun_pembukuan, bulan_akhir_pembukuan,"
+                + " bulan_awal_pembukuan, periode_pembukuan, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement prepare = null;
         try {
             prepare = con.prepareStatement(sql);
@@ -113,7 +114,8 @@ public class PerusahaanModel {
     }
 
     public boolean update(Perusahaan perusahaan) {
-        String sql = "UPDATE perusahaan SET nama=?, email=?, noTelp=?, alamat=?, thnBuku=?, blnAkhir=?, blnAwal=?, password=?, periode=? WHERE id=?";
+        String sql = "UPDATE perusahaan SET id, nama, email, telepon, alamat, tahun_pembukuan, bulan_akhir_pembukuan,"
+                + " bulan_awal_pembukuan, periode_pembukuan,password WHERE id=?";
         PreparedStatement prepare = null;
         try {
             prepare = con.prepareStatement(sql);
@@ -161,7 +163,7 @@ public class PerusahaanModel {
 
     public Perusahaan login(String email) {
         Perusahaan user = null;
-        String sql = "SELECT * FROM perusahaan WHERE email=?";
+        String sql = "SELECT * FROM perusahaan WHERE nama=?";
         try {
             PreparedStatement prepare = con.prepareStatement(sql);
             prepare.setString(1, email);
@@ -170,7 +172,7 @@ public class PerusahaanModel {
                 user = new Perusahaan(resultSet.getString(1), resultSet.getString(2), 
                         resultSet.getString(3), resultSet.getString(4), resultSet.getString(5),
                         resultSet.getInt(6), resultSet.getInt(7), resultSet.getInt(8), 
-                        resultSet.getString(9), resultSet.getInt(10));
+                        resultSet.getInt(9), resultSet.getString(10));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());

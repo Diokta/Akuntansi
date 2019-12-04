@@ -8,6 +8,8 @@ package view;
 import controller.ReportController;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import org.jvnet.substance.skin.SubstanceEmeraldDuskLookAndFeel;
@@ -30,30 +32,38 @@ public class MenuUtama extends javax.swing.JFrame {
         reportController = new ReportController();
     }
 
-    public void setActive(String level) {
-        if (level.equals("Admin Keuangan")) {
+    public void setActive() {
+//        if (level.equals("Admin Keuangan")) {
+//            masterMenu.setEnabled(true);
+//            adminMenu.setEnabled(true);
+//            biayaOperasionalMenu.setEnabled(true);
+//            produkSewaMenu.setEnabled(true);
+//            laporanMenu.setEnabled(true);
+//            loginMenu2.setText("Logout");
+//            loginMenu.setText("Logout Perusahaan");
+//        } else {
+//            masterMenu.setEnabled(true);
+//            adminMenu.setEnabled(false);
+//            biayaOperasionalMenu.setEnabled(false);
+//            produkSewaMenu.setEnabled(false);
+//            loginMenu2.setText("Logout");
+//        }
             masterMenu.setEnabled(true);
             adminMenu.setEnabled(true);
             biayaOperasionalMenu.setEnabled(true);
             produkSewaMenu.setEnabled(true);
             laporanMenu.setEnabled(true);
-            loginMenu.setText("Logout Admin");
             loginMenu.setText("Logout");
-        } else {
-            masterMenu.setEnabled(true);
-            adminMenu.setEnabled(false);
-            biayaOperasionalMenu.setEnabled(false);
-            produkSewaMenu.setEnabled(false);
-            loginMenu.setText("Logout Admin");
-            loginMenu.setText("Logout");
-        }
+            menuBar.remove(daftarMenu);
     }
 
     private void deactive() {
         masterMenu.setEnabled(false);
         laporanMenu.setEnabled(false);
         loginMenu.setText("Login");
+        menuBar.add(daftarMenu,0);
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -65,9 +75,8 @@ public class MenuUtama extends javax.swing.JFrame {
     private void initComponents() {
 
         desktopPane = new Fadly.CustomComponents.component.DesktopPane();
-        jMenuBar1 = new javax.swing.JMenuBar();
+        menuBar = new javax.swing.JMenuBar();
         daftarMenu = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
         loginMenu = new javax.swing.JMenu();
         masterMenu = new javax.swing.JMenu();
         adminMenu = new javax.swing.JMenuItem();
@@ -90,16 +99,12 @@ public class MenuUtama extends javax.swing.JFrame {
         desktopPane.setGambar(new java.io.File("E:\\Git_Repos\\program_akuntansi\\src\\resources\\Tulips.jpg"));
 
         daftarMenu.setText("Daftar");
-
-        jMenuItem1.setText("Perusahaan");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+        daftarMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                daftarMenuMouseClicked(evt);
             }
         });
-        daftarMenu.add(jMenuItem1);
-
-        jMenuBar1.add(daftarMenu);
+        menuBar.add(daftarMenu);
 
         loginMenu.setText("Login");
         loginMenu.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -107,7 +112,12 @@ public class MenuUtama extends javax.swing.JFrame {
                 loginMenuMouseClicked(evt);
             }
         });
-        jMenuBar1.add(loginMenu);
+        loginMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginMenuActionPerformed(evt);
+            }
+        });
+        menuBar.add(loginMenu);
 
         masterMenu.setText("Data Master");
         masterMenu.setEnabled(false);
@@ -152,7 +162,7 @@ public class MenuUtama extends javax.swing.JFrame {
         });
         masterMenu.add(Transaksi);
 
-        jMenuBar1.add(masterMenu);
+        menuBar.add(masterMenu);
 
         laporanMenu.setText("Laporan");
         laporanMenu.setEnabled(false);
@@ -213,9 +223,9 @@ public class MenuUtama extends javax.swing.JFrame {
         });
         laporanMenu.add(jMenuItem9);
 
-        jMenuBar1.add(laporanMenu);
+        menuBar.add(laporanMenu);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -300,6 +310,10 @@ public class MenuUtama extends javax.swing.JFrame {
         pv.setVisible(true);
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
+    private void TransaksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TransaksiActionPerformed
+
+    }//GEN-LAST:event_TransaksiActionPerformed
+
     private void loginMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginMenuMouseClicked
         if (loginMenu.getText().equals("Login")) {
             LoginView lv = new LoginView(this, true, this);
@@ -309,21 +323,17 @@ public class MenuUtama extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_loginMenuMouseClicked
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void loginMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginMenuActionPerformed
+        
+    }//GEN-LAST:event_loginMenuActionPerformed
+
+    private void daftarMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_daftarMenuMouseClicked
         DaftarView dv = new DaftarView();
         desktopPane.removeAll();
         desktopPane.add(dv);
         desktopPane.updateUI();
         dv.setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void TransaksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TransaksiActionPerformed
-        TransaksiJurnalView tjv = new TransaksiJurnalView();
-        desktopPane.removeAll();
-        desktopPane.add(tjv);
-        desktopPane.updateUI();
-        tjv.setVisible(true);
-    }//GEN-LAST:event_TransaksiActionPerformed
+    }//GEN-LAST:event_daftarMenuMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem Transaksi;
@@ -331,8 +341,6 @@ public class MenuUtama extends javax.swing.JFrame {
     private javax.swing.JMenuItem biayaOperasionalMenu;
     private javax.swing.JMenu daftarMenu;
     private Fadly.CustomComponents.component.DesktopPane desktopPane;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem2;
@@ -344,6 +352,7 @@ public class MenuUtama extends javax.swing.JFrame {
     private javax.swing.JMenu laporanMenu;
     private javax.swing.JMenu loginMenu;
     private javax.swing.JMenu masterMenu;
+    private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem produkSewaMenu;
     // End of variables declaration//GEN-END:variables
     private ReportController reportController;
