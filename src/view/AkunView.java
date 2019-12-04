@@ -13,7 +13,7 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import model.AkunModel;
-import tablemodel.BebanTableModel;
+import tablemodel.AkunTableModel;
 
 /**
  *
@@ -28,7 +28,7 @@ public class AkunView extends javax.swing.JInternalFrame {
         initComponents();
         bebanModel = new AkunModel();
         akunController = new AkunController(this, bebanModel);
-        akunController.refreshBebanTable();
+        akunController.refreshAkunTable();
         akunController.setAction();
         setLocation((1366 / 2) - (getWidth() / 2), (768 / 2) - (getHeight() / 2));
     }
@@ -37,7 +37,7 @@ public class AkunView extends javax.swing.JInternalFrame {
         return baruButton;
     }
 
-    public JTable getBebanTable() {
+    public JTable getAkunTable() {
         return akunTable;
     }
 
@@ -61,11 +61,11 @@ public class AkunView extends javax.swing.JInternalFrame {
         return updateButton;
     }
 
-    public BebanTableModel getBebanTableModel() {
+    public AkunTableModel getAkunTableModel() {
         return bebanTableModel;
     }
 
-    public void setBebanTableModel(BebanTableModel bebanTableModel) {
+    public void setAkunTableModel(AkunTableModel bebanTableModel) {
         this.bebanTableModel = bebanTableModel;
     }
 
@@ -354,7 +354,7 @@ public class AkunView extends javax.swing.JInternalFrame {
     private javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables
     private AkunModel bebanModel;
-    private BebanTableModel bebanTableModel;
+    private AkunTableModel bebanTableModel;
     private String id = "";
     private AkunController akunController;
 }

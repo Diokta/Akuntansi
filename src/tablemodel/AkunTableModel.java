@@ -14,16 +14,16 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author Fadli
  */
-public class BebanTableModel extends AbstractTableModel {
+public class AkunTableModel extends AbstractTableModel {
 
     private List<Akun> list;
     private String[] header = {"ID", "Nama", "Keterangan"};
 
-    public BebanTableModel() {
+    public AkunTableModel() {
         list = new ArrayList<>();
     }
 
-    public void setListBeban(List<Akun> list) {
+    public void setListAkun(List<Akun> list) {
         this.list = list;
     }
 

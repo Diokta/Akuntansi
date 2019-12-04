@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import model.AkunModel;
-import tablemodel.BebanTableModel;
+import tablemodel.AkunTableModel;
 import view.AkunView;
 
 /**
@@ -29,12 +29,12 @@ public class AkunController {
         this.akunModel = akunModel;
     }
 
-    public void refreshBebanTable() {
-        akunView.setBebanTableModel(new BebanTableModel());
-        akunView.getBebanTableModel().setListBeban(akunModel.getAll());
-        akunView.getBebanTable().setModel(akunView.getBebanTableModel());
-        akunView.getBebanTable().getTableHeader().setFont(new Font("Gill Sans MT", 0, 14));
-        // ResizeColumnUtility.dynamicResize(bebanView.getBebanTable());
+    public void refreshAkunTable() {
+        akunView.setAkunTableModel(new AkunTableModel());
+        akunView.getAkunTableModel().setListAkun(akunModel.getAll());
+        akunView.getAkunTable().setModel(akunView.getAkunTableModel());
+        akunView.getAkunTable().getTableHeader().setFont(new Font("Gill Sans MT", 0, 14));
+        // ResizeColumnUtility.dynamicResize(bebanView.getAkunTable());
     }
 
     public void addValueComponent(String id) {
@@ -45,7 +45,7 @@ public class AkunController {
     }
 
     private Akun createAkun() {
-        akun = new Akun(akunView.getIdField().getText(), akunView.getNamaField().getText(), akunView.getKeteranganField().getText());
+        akun = new Akun(akunView.getLabelAkun().getText() + akunView.getIdField().getText(), akunView.getNamaField().getText(), akunView.getKeteranganField().getText());
         return akun;
     }
 
@@ -65,7 +65,7 @@ public class AkunController {
     public void saveOrNew() {
         if (!isEmptyField()) {
             if (akunModel.insert(createAkun())) {
-                refreshBebanTable();
+                refreshAkunTable();
                 resetData();
                 JOptionPane.showMessageDialog(akunView, "Insert Data Akun Sukses.");
             } else {
@@ -77,7 +77,7 @@ public class AkunController {
     public void saveOrUpdate() {
         if (!isEmptyField()) {
             if (akunModel.update(createAkun())) {
-                refreshBebanTable();
+                refreshAkunTable();
                 resetData();
                 JOptionPane.showMessageDialog(akunView, "Update Data Akun Sukses.");
             } else {
@@ -87,7 +87,7 @@ public class AkunController {
     }
 
     public void saveOrDelete(String id) {
-        if (akunView.getBebanTable().getSelectedRow() != -1) {
+        if (akunView.getAkunTable().getSelectedRow() != -1) {
             if (JOptionPane.showConfirmDialog(akunView, "Anda yakin ingin menghapus data ini?", "Hapus data",
                     JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 if (akunModel.delete(id)) {
@@ -152,7 +152,7 @@ public class AkunController {
         akunView.getNamaField().setText("");
         akunView.getKeteranganField().setEnabled(false);
         akunView.getKeteranganField().setText("");
-        refreshBebanTable();
+        refreshAkunTable();
     }
 
     public void updateData() {
@@ -170,12 +170,12 @@ public class AkunController {
     }
 
     public void setAction() {
-        akunView.getBebanTable().getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+        akunView.getAkunTable().getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                if (akunView.getBebanTable().getSelectedRow() != -1) {
-                    akunView.setId(akunView.getBebanTable().getValueAt(
-                            akunView.getBebanTable().getSelectedRow(), 0).toString());
+                if (akunView.getAkunTable().getSelectedRow() != -1) {
+                    akunView.setId(akunView.getAkunTable().getValueAt(
+                            akunView.getAkunTable().getSelectedRow(), 0).toString());
                     addValueComponent(akunView.getId());
                 }
             }
