@@ -67,9 +67,9 @@ public class AkunController {
             if (akunModel.insert(createAkun())) {
                 refreshBebanTable();
                 resetData();
-                JOptionPane.showMessageDialog(akunView, "Insert Data Beban Sukses.");
+                JOptionPane.showMessageDialog(akunView, "Insert Data Akun Sukses.");
             } else {
-                JOptionPane.showMessageDialog(akunView, "Insert Data Beban Gagal !!!");
+                JOptionPane.showMessageDialog(akunView, "Insert Data Akun Gagal !!!");
             }
         }
     }
@@ -79,9 +79,9 @@ public class AkunController {
             if (akunModel.update(createAkun())) {
                 refreshBebanTable();
                 resetData();
-                JOptionPane.showMessageDialog(akunView, "Update Data Beban Sukses.");
+                JOptionPane.showMessageDialog(akunView, "Update Data Akun Sukses.");
             } else {
-                JOptionPane.showMessageDialog(akunView, "Update Data Beban Gagal !!!");
+                JOptionPane.showMessageDialog(akunView, "Update Data Akun Gagal !!!");
             }
         }
     }
@@ -92,9 +92,9 @@ public class AkunController {
                     JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 if (akunModel.delete(id)) {
                     resetData();
-                    JOptionPane.showMessageDialog(akunView, "Delete Data Beban Sukses.");
+                    JOptionPane.showMessageDialog(akunView, "Delete Data Akun Sukses.");
                 } else {
-                    JOptionPane.showMessageDialog(akunView, "Delete Data Beban Gagal !!!");
+                    JOptionPane.showMessageDialog(akunView, "Delete Data Akun Gagal !!!");
                 }
             }
         }
