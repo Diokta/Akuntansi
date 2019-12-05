@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 04, 2019 at 06:10 PM
+-- Generation Time: Dec 05, 2019 at 01:13 AM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -69,6 +69,9 @@ CREATE TABLE `akun` (
 
 INSERT INTO `akun` (`id`, `nama`, `keterangan`) VALUES
 ('1001', 'Kas', 'Kas Utama'),
+('2001', 'Pinjam Bank', 'Bank BCA'),
+('3001', 'Setoran Modal', 'Modal Usaha'),
+('4001', 'Pendapatan Iklan', 'Pendapatan dari produksi iklan'),
 ('5001', 'Beban Air', 'Rekening Air'),
 ('5002', 'Beban Perlengkapan', 'Perlengkapan Kantor'),
 ('5003', 'Beban Listrik', 'Rekening Listrik'),
@@ -82,6 +85,7 @@ INSERT INTO `akun` (`id`, `nama`, `keterangan`) VALUES
 --
 
 CREATE TABLE `buku_besar` (
+  `id` int(11) NOT NULL,
   `tanggal` date NOT NULL,
   `keterangan` text NOT NULL,
   `ref` varchar(10) NOT NULL,
@@ -96,13 +100,13 @@ CREATE TABLE `buku_besar` (
 -- Dumping data for table `buku_besar`
 --
 
-INSERT INTO `buku_besar` (`tanggal`, `keterangan`, `ref`, `nama_akun`, `sort`, `normal`, `debit`, `kredit`) VALUES
-('2015-05-19', 'Beban Perlengkapan', 'PB001', 'Kas', 1, NULL, 0, 130000),
-('2015-05-19', 'Beban Perlengkapan', 'PB001', 'Beban Perlengkapan', 2, NULL, 130000, 0),
-('2015-05-19', 'Penyewaan Mesin FC Xerox FX 001 3 bulan', 'PE001', 'Kas', 1, NULL, 660000, 0),
-('2015-05-19', 'Penyewaan Mesin FC Xerox FX 001 3 bulan', 'PE001', 'Penyewaan Mesin FC Xerox FX 001', 2, NULL, 0, 660000),
-('2015-05-19', 'Beban Iklan', 'PB002', 'Kas', 1, NULL, 0, 620000),
-('2015-05-19', 'Beban Iklan', 'PB002', 'Beban Iklan', 2, NULL, 620000, 0);
+INSERT INTO `buku_besar` (`id`, `tanggal`, `keterangan`, `ref`, `nama_akun`, `sort`, `normal`, `debit`, `kredit`) VALUES
+(27, '2019-12-05', 'Modal Awal', 'J001', 'Kas', 1, NULL, 5000, 0),
+(28, '2019-12-05', 'Modal Awal', 'J001', 'Setoran Modal', 2, NULL, 0, 5000),
+(29, '2019-12-06', 'Beli Air Minum', 'J002', 'Kas', 1, NULL, 0, 2100),
+(30, '2019-12-06', 'Beli Air Minum', 'J002', 'Beban Air', 2, NULL, 2100, 0),
+(31, '2019-12-06', 'Pendapatan Iklan Sampo', 'J003', 'Kas', 1, NULL, 0, 7600),
+(32, '2019-12-06', 'Pendapatan Iklan Sampo', 'J003', 'Pendapatan Iklan', 2, NULL, 0, 7600);
 
 -- --------------------------------------------------------
 
@@ -118,6 +122,15 @@ CREATE TABLE `jurnal` (
   `kredit` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `jurnal`
+--
+
+INSERT INTO `jurnal` (`id`, `tanggal`, `keterangan`, `debit`, `kredit`) VALUES
+('J001', '2019-12-05', 'Kas', 5000, 0),
+('J002', '2019-12-06', 'Beli Air Minum', 2100, 0),
+('J003', '2019-12-06', 'Kas', 7600, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -125,6 +138,7 @@ CREATE TABLE `jurnal` (
 --
 
 CREATE TABLE `laba_rugi` (
+  `id` int(11) NOT NULL,
   `ref` varchar(10) NOT NULL,
   `tanggal` date NOT NULL,
   `kelompok` varchar(50) NOT NULL,
@@ -136,10 +150,9 @@ CREATE TABLE `laba_rugi` (
 -- Dumping data for table `laba_rugi`
 --
 
-INSERT INTO `laba_rugi` (`ref`, `tanggal`, `kelompok`, `nama_akun`, `nominal`) VALUES
-('PB001', '2015-05-19', 'Beban Operasional', 'Beban Perlengkapan', 130000),
-('PE001', '2015-05-19', 'Pendapatan', 'Penyewaan Mesin FC Xerox FX 001', 660000),
-('PB002', '2015-05-19', 'Beban Operasional', 'Beban Iklan', 620000);
+INSERT INTO `laba_rugi` (`id`, `ref`, `tanggal`, `kelompok`, `nama_akun`, `nominal`) VALUES
+(1, 'J002', '2019-12-06', 'Pengeluaran', 'Beli Air Minum', 2100),
+(2, 'J003', '2019-12-06', 'Pendapatan', 'Pendapatan Iklan Sampo', 7600);
 
 -- --------------------------------------------------------
 
@@ -231,14 +244,21 @@ CREATE TABLE `perusahaan` (
   `id` varchar(10) NOT NULL,
   `nama` varchar(35) NOT NULL,
   `email` varchar(35) NOT NULL,
-  `password` varchar(20) NOT NULL,
   `telepon` varchar(20) NOT NULL,
   `alamat` text NOT NULL,
   `tahun_pembukuan` int(11) NOT NULL,
   `bulan_akhir_pembukuan` tinyint(4) NOT NULL,
   `bulan_awal_pembukuan` tinyint(4) NOT NULL,
-  `periode_pembukuan` tinyint(4) NOT NULL
+  `periode_pembukuan` tinyint(4) NOT NULL,
+  `password` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `perusahaan`
+--
+
+INSERT INTO `perusahaan` (`id`, `nama`, `email`, `telepon`, `alamat`, `tahun_pembukuan`, `bulan_akhir_pembukuan`, `bulan_awal_pembukuan`, `periode_pembukuan`, `password`) VALUES
+('PS001', 'Difan', 'difan@gmail.com', '0857123214213', 'tanah merdeka', 2020, 1, 1, 12, 'difan');
 
 -- --------------------------------------------------------
 
@@ -277,6 +297,18 @@ CREATE TABLE `transaksi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- Dumping data for table `transaksi`
+--
+
+INSERT INTO `transaksi` (`id`, `id_akun`, `id_jurnal`, `debit`, `kredit`, `keterangan`) VALUES
+(57, '1001', 'J001', 5000, 0, 'Kas'),
+(58, '3001', 'J001', 0, 5000, 'Modal Awal'),
+(59, '5001', 'J002', 2100, 0, 'Beli Air Minum'),
+(60, '1001', 'J002', 0, 2100, 'Kas'),
+(61, '1001', 'J003', 7600, 0, 'Kas'),
+(62, '4001', 'J003', 0, 7600, 'Pendapatan Iklan Sampo');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -293,9 +325,21 @@ ALTER TABLE `akun`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `buku_besar`
+--
+ALTER TABLE `buku_besar`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `jurnal`
 --
 ALTER TABLE `jurnal`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `laba_rugi`
+--
+ALTER TABLE `laba_rugi`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -341,10 +385,22 @@ ALTER TABLE `transaksi`
 --
 
 --
+-- AUTO_INCREMENT for table `buku_besar`
+--
+ALTER TABLE `buku_besar`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+
+--
+-- AUTO_INCREMENT for table `laba_rugi`
+--
+ALTER TABLE `laba_rugi`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- Constraints for dumped tables

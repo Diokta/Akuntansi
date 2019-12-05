@@ -98,6 +98,10 @@ public class ReportController {
         map = new HashMap<>();
         map.put("BULAN", bulan);
         map.put("TAHUN", tahun);
+        map.put("NAMAPERUSAHAAN", MenuUtama.DataPerusahaan.getNama());
+        map.put("ALAMATPERUSAHAAN", MenuUtama.DataPerusahaan.getAlamat());        
+        map.put("TELPPERUSAHAAN", MenuUtama.DataPerusahaan.getNoTelp());
+        
         try {
             JasperPrint jasperPrint = JasperFillManager.fillReport(stream, map, ConnectionUtility.getConnection());
             JasperViewer.viewReport(jasperPrint, false);

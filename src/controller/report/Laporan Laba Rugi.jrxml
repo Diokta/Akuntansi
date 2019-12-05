@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Laporan Laba Rugi" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Laporan Laba Rugi" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -23,6 +23,9 @@
 	</style>
 	<parameter name="BULAN" class="java.lang.String"/>
 	<parameter name="TAHUN" class="java.lang.String"/>
+	<parameter name="NAMAPERUSAHAAN" class="java.lang.String"/>
+	<parameter name="ALAMATPERUSAHAAN" class="java.lang.String"/>
+	<parameter name="TELPPERUSAHAAN" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT
      laba_rugi.`ref` AS laba_rugi_ref,
@@ -35,7 +38,7 @@ FROM
 WHERE
      MONTHNAME(laba_rugi.tanggal)=$P{BULAN} AND YEAR(laba_rugi.tanggal)=$P{TAHUN}
 ORDER BY
-     laba_rugi.kelompok DESC]]>
+     laba_rugi.kelompok ASC]]>
 	</queryString>
 	<field name="laba_rugi_ref" class="java.lang.String"/>
 	<field name="laba_rugi_tanggal" class="java.sql.Date"/>
@@ -47,9 +50,8 @@ ORDER BY
 	</variable>
 	<variable name="LABA_RUGI" class="java.lang.Number" calculation="Sum">
 		<variableExpression><![CDATA[(
-$F{laba_rugi_kelompok}=="Pendapatan" ? + $F{laba_rugi_nominal} :
-$F{laba_rugi_kelompok}=="Beban Operasional" ? - $F{laba_rugi_nominal} :
-$F{laba_rugi_kelompok}=="Harga Pokok Penjualan" ? - $F{laba_rugi_nominal} :
+$F{laba_rugi_kelompok}.equals("Pendapatan") ? + $F{laba_rugi_nominal} :
+$F{laba_rugi_kelompok}.equals("Pengeluaran") ? - $F{laba_rugi_nominal} :
 0
 )]]></variableExpression>
 	</variable>
@@ -117,33 +119,33 @@ $F{laba_rugi_kelompok}=="Harga Pokok Penjualan" ? - $F{laba_rugi_nominal} :
 	</background>
 	<title>
 		<band height="101" splitType="Stretch">
-			<staticText>
+			<textField>
 				<reportElement x="120" y="43" width="435" height="20"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Cambria Math" size="12"/>
 				</textElement>
-				<text><![CDATA[Penjualan dan Penyewaan Mesin Foto Copy dan Perlengkapannya]]></text>
-			</staticText>
-			<staticText>
+				<textFieldExpression><![CDATA["NO. TELP : " + $P{TELPPERUSAHAAN}]]></textFieldExpression>
+			</textField>
+			<textField>
 				<reportElement x="120" y="0" width="435" height="43"/>
 				<textElement>
 					<font fontName="Cambria Math" size="30"/>
 				</textElement>
-				<text><![CDATA[CV. Surya Printindo]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA[$P{NAMAPERUSAHAAN}]]></textFieldExpression>
+			</textField>
 			<line>
-				<reportElement x="0" y="94" width="555" height="1"/>
+				<reportElement x="0" y="94" width="802" height="1"/>
 				<graphicElement>
 					<pen lineWidth="1.75"/>
 				</graphicElement>
 			</line>
-			<staticText>
+			<textField>
 				<reportElement x="120" y="63" width="435" height="20"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Cambria Math" size="12"/>
 				</textElement>
-				<text><![CDATA[Alamat : Jl Rajawali Kompl Taman Rajawali Bl III/7]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA["ALAMAT : " + $P{ALAMATPERUSAHAAN}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<pageHeader>

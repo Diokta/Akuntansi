@@ -172,10 +172,13 @@ public class TransaksiJurnalModel {
                 + "VALUES (?, ?, ?, ?, ?)";
         String sql4 = "INSERT INTO buku_besar (tanggal, ref, keterangan, nama_akun, sort, debit, kredit) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql5 = "INSERT INTO laba_rugi (tanggal, ref, kelompok, nama_akun, nominal) "
+                + "VALUES (?, ?, ?, ?, ?)";
         PreparedStatement prepare2 = null;
         PreparedStatement prepare3 = null;
         PreparedStatement prepare4 = null;
         PreparedStatement prepare5 = null;
+        PreparedStatement prepare6 = null;
         
         try {
             prepare2 = con.prepareStatement(sql2);
@@ -194,6 +197,7 @@ public class TransaksiJurnalModel {
             prepare3 = con.prepareStatement(sql3);
             prepare4 = con.prepareStatement(sql4);
             prepare5 = con.prepareStatement(sql4);
+            prepare6 = con.prepareStatement(sql5);
             con.setAutoCommit(false);
             
             prepare3.setObject(1, transaksi_jurnal.getId_akun());
@@ -263,9 +267,17 @@ public class TransaksiJurnalModel {
                 prepare5.setObject(4, getNamaAkun(transaksi_jurnal.getId_akun()));
                 prepare5.setObject(5, 2);
                 prepare5.setObject(6, 0);
-                prepare5.setObject(7, transaksi_jurnal.getKredit());          
+                prepare5.setObject(7, transaksi_jurnal.getKredit());   
+                
+                prepare6.setObject(1, transaksi_jurnal.getTanggal());
+                prepare6.setObject(2, transaksi_jurnal.getId_jurnal());
+                prepare6.setObject(3, "Pendapatan");
+                prepare6.setObject(4, transaksi_jurnal.getKeterangan());
+                prepare6.setObject(5, transaksi_jurnal.getKredit());
+                
                 prepare4.executeUpdate();
-                prepare5.executeUpdate();
+                prepare5.executeUpdate();                
+                prepare6.executeUpdate();
             } else if (transaksi_jurnal.getId_akun().charAt(0) == '5') {
                 prepare4.setObject(1, transaksi_jurnal.getTanggal());
                 prepare4.setObject(2, transaksi_jurnal.getId_jurnal());
@@ -281,9 +293,17 @@ public class TransaksiJurnalModel {
                 prepare5.setObject(4, getNamaAkun(transaksi_jurnal.getId_akun()));
                 prepare5.setObject(5, 2);
                 prepare5.setObject(6, transaksi_jurnal.getDebit());
-                prepare5.setObject(7, 0);          
+                prepare5.setObject(7, 0);      
+                
+                prepare6.setObject(1, transaksi_jurnal.getTanggal());
+                prepare6.setObject(2, transaksi_jurnal.getId_jurnal());
+                prepare6.setObject(3, "Pengeluaran");
+                prepare6.setObject(4, transaksi_jurnal.getKeterangan());
+                prepare6.setObject(5, transaksi_jurnal.getDebit());
+                
                 prepare4.executeUpdate();
-                prepare5.executeUpdate();
+                prepare5.executeUpdate();                
+                prepare6.executeUpdate();
             }
             
             prepare3.executeUpdate();  
