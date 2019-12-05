@@ -10,6 +10,8 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -118,11 +120,15 @@ public class ReportController {
         map = new HashMap<>();
         map.put("BULAN", bulan);
         map.put("TAHUN", tahun);
+        map.put("NAMAPERUSAHAAN", MenuUtama.DataPerusahaan.getNama());
+        map.put("ALAMATPERUSAHAAN", MenuUtama.DataPerusahaan.getAlamat());        
+        map.put("TELPPERUSAHAAN", MenuUtama.DataPerusahaan.getNoTelp());
+        
         try {
             JasperPrint jasperPrint = JasperFillManager.fillReport(stream, map, ConnectionUtility.getConnection());
             JasperViewer.viewReport(jasperPrint, false);
         } catch (JRException ex) {
-            //Logger.getLogger(KonsultasiController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ReportController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -132,6 +138,9 @@ public class ReportController {
         stream = getClass().getResourceAsStream("report/Laporan Neraca Saldo Tahunan.jasper");
         map = new HashMap<>();
         map.put("TAHUN", tahun);
+        map.put("NAMAPERUSAHAAN", MenuUtama.DataPerusahaan.getNama());
+        map.put("ALAMATPERUSAHAAN", MenuUtama.DataPerusahaan.getAlamat());        
+        map.put("TELPPERUSAHAAN", MenuUtama.DataPerusahaan.getNoTelp());
         try {
             JasperPrint jasperPrint = JasperFillManager.fillReport(stream, map, ConnectionUtility.getConnection());
             JasperViewer.viewReport(jasperPrint, false);
