@@ -201,6 +201,7 @@ public class MenuUtama extends javax.swing.JFrame {
         menuBar.add(laporanMenu);
 
         kinerjaMenu.setText("Kinerja Keuangan");
+        kinerjaMenu.setEnabled(false);
 
         CurrentRasioMenu.setText("Current Rasio");
         CurrentRasioMenu.addActionListener(new java.awt.event.ActionListener() {
@@ -219,6 +220,11 @@ public class MenuUtama extends javax.swing.JFrame {
         kinerjaMenu.add(epsMenu);
 
         roiMenu.setText("Return on Investment");
+        roiMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                roiMenuActionPerformed(evt);
+            }
+        });
         kinerjaMenu.add(roiMenu);
 
         menuBar.add(kinerjaMenu);
@@ -310,17 +316,22 @@ public class MenuUtama extends javax.swing.JFrame {
     }//GEN-LAST:event_CurrentRasioMenuActionPerformed
 
     private void adminMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminMenuActionPerformed
-        AdminView av = new AdminView();
+        PerusahaanView pv = new PerusahaanView();
         desktopPane.removeAll();
-        desktopPane.add(av);
+        desktopPane.add(pv);
         desktopPane.updateUI();
-        av.setVisible(true);
+        pv.setVisible(true);
     }//GEN-LAST:event_adminMenuActionPerformed
 
     private void epsMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_epsMenuActionPerformed
-        epsView vv = new epsView(this, true, false);
+        epsView vv = new epsView(this, true);
         vv.setVisible(true);
     }//GEN-LAST:event_epsMenuActionPerformed
+
+    private void roiMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roiMenuActionPerformed
+        roiView rv = new roiView(this, true);
+        rv.setVisible(true);
+    }//GEN-LAST:event_roiMenuActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem CurrentRasioMenu;

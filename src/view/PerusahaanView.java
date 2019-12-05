@@ -28,7 +28,7 @@ public class PerusahaanView extends javax.swing.JInternalFrame {
         initComponents();
         PerusahaanModel = new PerusahaanModel();
         PerusahaanController = new PerusahaanController(this, PerusahaanModel);
-        PerusahaanController.addValueComponent(PerusahaanController.id);
+        PerusahaanController.addValueComponent();
         setLocation((1366 / 2) - (getWidth() / 2), (768 / 2) - (getHeight() / 2));
     }
 

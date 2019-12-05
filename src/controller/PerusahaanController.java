@@ -54,13 +54,12 @@ public class PerusahaanController {
 //        // ResizeColumnUtility.dynamicResize(perusahaanView.getPerusahaanTable());
 //    }
 
-    public void addValueComponent(String id) {
-        perusahaan = perusahaanModel.getPerusahaan(id);
-        perusahaanView.getNamaField().setText(perusahaan.getNama());
-        perusahaanView.getEmailField().setText(perusahaan.getEmail());
-        perusahaanView.getNoTelpField().setText(perusahaan.getNoTelp());
-        perusahaanView.getPasswordField().setText(perusahaan.getPassword());
-        perusahaanView.getAlamatField().setText(perusahaan.getAlamat());
+    public void addValueComponent() {
+        perusahaanView.getNamaField().setText(MenuUtama.DataPerusahaan.getNama());
+        perusahaanView.getEmailField().setText(MenuUtama.DataPerusahaan.getEmail());
+        perusahaanView.getNoTelpField().setText(MenuUtama.DataPerusahaan.getNoTelp());
+        perusahaanView.getPasswordField().setText(MenuUtama.DataPerusahaan.getPassword());
+        perusahaanView.getAlamatField().setText(MenuUtama.DataPerusahaan.getAlamat());
     }
 
     private Perusahaan createPerusahaan() {

@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Earning Per Share" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ee2470e2-3100-4294-a944-34e32faba826">
+	<property name="ireport.zoom" value="1.100000000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="HeaderStyle" mode="Opaque" backcolor="#CCCCCC" fill="Solid" fontName="Cambria Math" fontSize="12">
+		<pen lineWidth="0.5" lineColor="#000000"/>
+		<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+			<topPen lineWidth="0.75" lineColor="#999999"/>
+			<leftPen lineWidth="0.75" lineColor="#999999"/>
+			<bottomPen lineWidth="0.75" lineColor="#999999"/>
+			<rightPen lineWidth="0.75" lineColor="#999999"/>
+		</box>
+	</style>
+	<style name="RecordStyle" hAlign="Left" vAlign="Middle" fontName="Cambria Math" fontSize="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false">
+		<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+			<topPen lineWidth="0.25" lineColor="#CCCCCC"/>
+			<leftPen lineWidth="0.25" lineColor="#CCCCCC"/>
+			<bottomPen lineWidth="0.25" lineColor="#CCCCCC"/>
+			<rightPen lineWidth="0.25" lineColor="#CCCCCC"/>
+		</box>
+		<paragraph leftIndent="5" rightIndent="5"/>
+	</style>
+	<parameter name="NAMAPERUSAHAAN" class="java.lang.String"/>
+	<parameter name="ALAMATPERUSAHAAN" class="java.lang.String"/>
+	<parameter name="TELPPERUSAHAAN" class="java.lang.String"/>
+	<parameter name="BULAN" class="java.lang.String"/>
+	<parameter name="TAHUN" class="java.lang.String"/>
+	<parameter name="TOTALINVESTMENT" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT
+     laba_rugi.`ref` AS laba_rugi_ref,
+     laba_rugi.`tanggal` AS laba_rugi_tanggal,
+     laba_rugi.`kelompok` AS laba_rugi_kelompok,
+     laba_rugi.`nama_akun` AS laba_rugi_nama_akun,
+     laba_rugi.`nominal` AS laba_rugi_nominal
+FROM
+     `laba_rugi` laba_rugi
+WHERE
+     MONTHNAME(laba_rugi.tanggal)=$P{BULAN} AND YEAR(laba_rugi.tanggal)=$P{TAHUN}
+ORDER BY
+     laba_rugi.kelompok ASC]]>
+	</queryString>
+	<field name="laba_rugi_ref" class="java.lang.String"/>
+	<field name="laba_rugi_tanggal" class="java.sql.Date"/>
+	<field name="laba_rugi_kelompok" class="java.lang.String"/>
+	<field name="laba_rugi_nama_akun" class="java.lang.String"/>
+	<field name="laba_rugi_nominal" class="java.lang.Long"/>
+	<variable name="LABA_RUGI" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[(
+$F{laba_rugi_kelompok}.equals("Pendapatan") ? + $F{laba_rugi_nominal} :
+$F{laba_rugi_kelompok}.equals("Pengeluaran") ? - $F{laba_rugi_nominal} :
+0
+)]]></variableExpression>
+	</variable>
+	<variable name="PENDAPATAN" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[(($F{laba_rugi_kelompok}.toLowerCase()).equals("pendapatan"))?
+$F{laba_rugi_nominal}:0]]></variableExpression>
+	</variable>
+	<variable name="ROI" class="java.lang.Number">
+		<variableExpression><![CDATA[$V{LABA_RUGI}/$P{TOTALINVESTMENT}]]></variableExpression>
+	</variable>
+	<group name="jurnal_tanggal">
+		<groupExpression><![CDATA[]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="102" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="43" width="555" height="20" uuid="c0f2926e-cfcc-4ad3-b112-c6028bcff41e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Cambria Math" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["NO. TELP : " + $P{TELPPERUSAHAAN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="0" width="554" height="43" uuid="6d545fa1-f368-4c7b-abde-ac690ee09b66"/>
+				<textElement textAlignment="Center">
+					<font fontName="Cambria Math" size="30"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NAMAPERUSAHAAN}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="94" width="555" height="1" uuid="335053c1-baca-42e7-a1c6-538fe679a831"/>
+				<graphicElement>
+					<pen lineWidth="1.75"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="1" y="63" width="554" height="20" uuid="0ffc13fe-879e-4a42-af65-b2d8a49dce59"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Cambria Math" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ALAMAT : " + $P{ALAMATPERUSAHAAN}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="148" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="29" uuid="64aab47e-a50a-456c-955a-f0589daefbf1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Cambria Math" size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Return On Investment]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="88" width="120" height="29" uuid="7317df9d-7cbf-45da-8977-1003d8264f4a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Cambria Math" size="14"/>
+				</textElement>
+				<text><![CDATA[Rumus :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="133" y="77" width="120" height="20" uuid="6fe80106-de9a-4a14-afef-798f37760a5b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Cambria Math" size="14"/>
+				</textElement>
+				<text><![CDATA[Pendapatan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="113" y="108" width="159" height="25" uuid="f271af9f-6589-4462-8744-1c5daac3ff19"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Cambria Math" size="14"/>
+				</textElement>
+				<text><![CDATA[Total Investment]]></text>
+			</staticText>
+			<line>
+				<reportElement x="111" y="103" width="165" height="1" uuid="7833f232-3598-4798-a961-45bda88c60b0"/>
+			</line>
+			<textField>
+				<reportElement x="10" y="33" width="555" height="20" uuid="c6ff4c14-92bc-4976-b658-635800884eb2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Cambria Math" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Periode Bulan " + $P{BULAN} + " " + $P{TAHUN}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="276" y="88" width="26" height="25" uuid="44b335e6-eefc-485c-968d-1c88ffb249ab"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Cambria Math" size="14"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<line>
+				<reportElement x="302" y="103" width="165" height="1" uuid="237b57d8-cb6b-4f03-ad0d-a95e23b32793"/>
+			</line>
+			<staticText>
+				<reportElement x="304" y="108" width="159" height="25" uuid="5267d805-da9f-4154-bb57-d74c0b5be803"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Cambria Math" size="14"/>
+				</textElement>
+				<text><![CDATA[Pendapatan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="324" y="77" width="120" height="20" uuid="70aa3ce8-b7ba-40e2-8897-7f2d1802205b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Cambria Math" size="14"/>
+				</textElement>
+				<text><![CDATA[Laba]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<lastPageFooter>
+		<band/>
+	</lastPageFooter>
+	<summary>
+		<band height="213" splitType="Stretch">
+			<line>
+				<reportElement x="158" y="37" width="114" height="1" uuid="bf6d9c10-fae6-400b-80d5-9d72ae45f2f3"/>
+			</line>
+			<staticText>
+				<reportElement x="1" y="21" width="157" height="29" uuid="ba0f4c30-f29e-443a-b8c5-ef0664354bc9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Cambria Math" size="14"/>
+				</textElement>
+				<text><![CDATA[Return On Investment =]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="87" width="157" height="29" uuid="f3409b25-6318-4a8d-8d0f-2a09c3065038"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Cambria Math" size="14"/>
+				</textElement>
+				<text><![CDATA[Return On Investment =]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="310" y="12" width="114" height="20" uuid="b49d5893-373f-4220-91f7-b416d64f12db"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Cambria Math" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{LABA_RUGI}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="310" y="37" width="114" height="1" uuid="ffed7ac9-8e21-4ec5-a7b3-99124170832d"/>
+			</line>
+			<textField>
+				<reportElement x="158" y="44" width="114" height="21" uuid="7aaf579d-c9b6-4ec9-83df-d4780d2759ae"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Cambria Math" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{TOTALINVESTMENT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="158" y="12" width="114" height="20" uuid="4fe29469-2483-4ad0-b18d-6f50413d7c04"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Cambria Math" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PENDAPATAN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="45" width="114" height="20" uuid="fefec92b-4e8e-4e45-969a-60f223e013ed"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Cambria Math" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PENDAPATAN}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="278" y="25" width="26" height="25" uuid="36fbc948-adff-49b8-83d2-d525930d8072"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Cambria Math" size="14"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="158" y="87" width="114" height="29" uuid="e9b985ba-21d6-45cf-8523-41ce76abf7db"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Cambria Math" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{ROI}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

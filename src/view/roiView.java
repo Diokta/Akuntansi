@@ -13,12 +13,12 @@ import java.math.BigInteger;
  *
  * @author Fadli Hudaya
  */
-public class epsView extends javax.swing.JDialog {
+public class roiView extends javax.swing.JDialog {
 
     /**
      * Creates new form PeriodeView
      */
-    public epsView(java.awt.Frame parent, boolean modal) {
+    public roiView(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
@@ -81,9 +81,7 @@ public class epsView extends javax.swing.JDialog {
 
         jLabel2 = new javax.swing.JLabel();
         baruButton2 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        lembarField = new javax.swing.JTextField();
-        hargaField = new javax.swing.JTextField();
+        totalField = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         bulanField = new javax.swing.JComboBox();
         tahunField = new javax.swing.JComboBox();
@@ -91,7 +89,7 @@ public class epsView extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel2.setFont(new java.awt.Font("Gill Sans MT", 0, 13)); // NOI18N
-        jLabel2.setText("Jumlah Lembar Saham :");
+        jLabel2.setText("Total Investment :");
 
         baruButton2.setFont(new java.awt.Font("Gill Sans MT", 0, 13)); // NOI18N
         baruButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/batal.png"))); // NOI18N
@@ -101,9 +99,6 @@ public class epsView extends javax.swing.JDialog {
                 baruButton2ActionPerformed(evt);
             }
         });
-
-        jLabel3.setFont(new java.awt.Font("Gill Sans MT", 0, 13)); // NOI18N
-        jLabel3.setText("Harga Per Lembar:");
 
         jLabel4.setFont(new java.awt.Font("Gill Sans MT", 0, 13)); // NOI18N
         jLabel4.setText("Periode :");
@@ -123,24 +118,17 @@ public class epsView extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(baruButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE))
+                        .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lembarField)
-                            .addComponent(hargaField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(totalField))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bulanField, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(bulanField, 0, 143, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tahunField, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel2, jLabel3});
-
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -152,12 +140,8 @@ public class epsView extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(lembarField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(totalField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(hargaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(8, 8, 8)
                 .addComponent(baruButton2)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -167,19 +151,17 @@ public class epsView extends javax.swing.JDialog {
 
     private void baruButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_baruButton2ActionPerformed
         this.dispose();
-        reportController.getEPS(parseMonth(bulanField.getSelectedIndex() + 1), tahunField.getSelectedItem().toString(),
-                Integer.parseInt(lembarField.getText()), new BigDecimal(hargaField.getText()));
+        reportController.getROI(parseMonth(bulanField.getSelectedIndex() + 1), tahunField.getSelectedItem().toString(),
+                Integer.parseInt(totalField.getText()));
     }//GEN-LAST:event_baruButton2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton baruButton2;
     private javax.swing.JComboBox bulanField;
-    private javax.swing.JTextField hargaField;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField lembarField;
     private javax.swing.JComboBox tahunField;
+    private javax.swing.JTextField totalField;
     // End of variables declaration//GEN-END:variables
     private ReportController reportController;
     private int option = 0;
