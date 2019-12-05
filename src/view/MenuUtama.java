@@ -33,6 +33,11 @@ public class MenuUtama extends javax.swing.JFrame {
         initComponents();
         setExtendedState(6);
         reportController = new ReportController();
+        WelcomeView wv = new WelcomeView();
+        desktopPane.removeAll();
+        desktopPane.updateUI();
+        desktopPane.add(wv);
+        wv.setVisible(true);
     }
 
     public void setActive() {
@@ -54,7 +59,6 @@ public class MenuUtama extends javax.swing.JFrame {
             masterMenu.setEnabled(true);
             adminMenu.setEnabled(true);
             biayaOperasionalMenu.setEnabled(true);
-            produkSewaMenu.setEnabled(true);
             laporanMenu.setEnabled(true);
             loginMenu.setText("Logout");
             menuBar.remove(daftarMenu);
@@ -84,26 +88,22 @@ public class MenuUtama extends javax.swing.JFrame {
         masterMenu = new javax.swing.JMenu();
         adminMenu = new javax.swing.JMenuItem();
         biayaOperasionalMenu = new javax.swing.JMenuItem();
-        produkSewaMenu = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
         Transaksi = new javax.swing.JMenuItem();
         laporanMenu = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem13 = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
         kinerjaMenu = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        CurrentRasioMenu = new javax.swing.JMenuItem();
+        epsMenu = new javax.swing.JMenuItem();
+        roiMenu = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SIAK DIFAN");
 
-        desktopPane.setGambar(new java.io.File("E:\\Git_Repos\\program_akuntansi\\src\\resources\\Tulips.jpg"));
+        desktopPane.setGambar(new java.io.File("E:\\Git_Repos\\program_akuntansi\\src\\resources\\bg_accounting.jpg"));
 
         daftarMenu.setText("Daftar");
         daftarMenu.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -145,22 +145,6 @@ public class MenuUtama extends javax.swing.JFrame {
         });
         masterMenu.add(biayaOperasionalMenu);
 
-        produkSewaMenu.setText("Produk Sewa");
-        produkSewaMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                produkSewaMenuActionPerformed(evt);
-            }
-        });
-        masterMenu.add(produkSewaMenu);
-
-        jMenuItem2.setText("Pelanggan");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
-            }
-        });
-        masterMenu.add(jMenuItem2);
-
         Transaksi.setText("Transaksi");
         Transaksi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -173,22 +157,6 @@ public class MenuUtama extends javax.swing.JFrame {
 
         laporanMenu.setText("Laporan");
         laporanMenu.setEnabled(false);
-
-        jMenuItem5.setText("Laporan Produk Sewa");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
-            }
-        });
-        laporanMenu.add(jMenuItem5);
-
-        jMenuItem6.setText("Laporan Pelanggan");
-        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem6ActionPerformed(evt);
-            }
-        });
-        laporanMenu.add(jMenuItem6);
 
         jMenuItem7.setText("Laporan Jurnal Umum");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
@@ -234,24 +202,24 @@ public class MenuUtama extends javax.swing.JFrame {
 
         kinerjaMenu.setText("Kinerja Keuangan");
 
-        jMenuItem1.setText("Current Rasio");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        CurrentRasioMenu.setText("Current Rasio");
+        CurrentRasioMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                CurrentRasioMenuActionPerformed(evt);
             }
         });
-        kinerjaMenu.add(jMenuItem1);
+        kinerjaMenu.add(CurrentRasioMenu);
 
-        jMenuItem3.setText("Earning Per Share");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        epsMenu.setText("Earning Per Share");
+        epsMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                epsMenuActionPerformed(evt);
             }
         });
-        kinerjaMenu.add(jMenuItem3);
+        kinerjaMenu.add(epsMenu);
 
-        jMenuItem4.setText("Return on Investment");
-        kinerjaMenu.add(jMenuItem4);
+        roiMenu.setText("Return on Investment");
+        kinerjaMenu.add(roiMenu);
 
         menuBar.add(kinerjaMenu);
 
@@ -271,22 +239,6 @@ public class MenuUtama extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void produkSewaMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_produkSewaMenuActionPerformed
-        ProdukSewaView sv = new ProdukSewaView();
-        desktopPane.removeAll();
-        desktopPane.updateUI();
-        desktopPane.add(sv);
-        sv.setVisible(true);
-    }//GEN-LAST:event_produkSewaMenuActionPerformed
-
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        PelangganView pv = new PelangganView();
-        desktopPane.removeAll();
-        desktopPane.updateUI();
-        desktopPane.add(pv);
-        pv.setVisible(true);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
     private void biayaOperasionalMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_biayaOperasionalMenuActionPerformed
         AkunView bv = new AkunView();
         desktopPane.removeAll();
@@ -294,14 +246,6 @@ public class MenuUtama extends javax.swing.JFrame {
         desktopPane.add(bv);
         bv.setVisible(true);
     }//GEN-LAST:event_biayaOperasionalMenuActionPerformed
-
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        reportController.getReportProduk();
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
-
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        reportController.getReportPelanggan();
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         PeriodeView pv = new PeriodeView(this, true, true);
@@ -320,14 +264,6 @@ public class MenuUtama extends javax.swing.JFrame {
         pv.setOption(3);
         pv.setVisible(true);
     }//GEN-LAST:event_jMenuItem9ActionPerformed
-
-    private void adminMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminMenuActionPerformed
-        AdminView av = new AdminView();
-        desktopPane.removeAll();
-        desktopPane.add(av);
-        desktopPane.updateUI();
-        av.setVisible(true);
-    }//GEN-LAST:event_adminMenuActionPerformed
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
         PeriodeView pv = new PeriodeView(this, true, true);
@@ -369,29 +305,33 @@ public class MenuUtama extends javax.swing.JFrame {
         dv.setVisible(true);
     }//GEN-LAST:event_daftarMenuMouseClicked
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void CurrentRasioMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CurrentRasioMenuActionPerformed
         reportController.getCashRasio();
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_CurrentRasioMenuActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void adminMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminMenuActionPerformed
+        AdminView av = new AdminView();
+        desktopPane.removeAll();
+        desktopPane.add(av);
+        desktopPane.updateUI();
+        av.setVisible(true);
+    }//GEN-LAST:event_adminMenuActionPerformed
+
+    private void epsMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_epsMenuActionPerformed
         epsView vv = new epsView(this, true, true);
         vv.setVisible(true);
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_epsMenuActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem CurrentRasioMenu;
     private javax.swing.JMenuItem Transaksi;
     private javax.swing.JMenuItem adminMenu;
     private javax.swing.JMenuItem biayaOperasionalMenu;
     private javax.swing.JMenu daftarMenu;
     private Fadly.CustomComponents.component.DesktopPane desktopPane;
-    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem epsMenu;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem13;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
@@ -400,7 +340,7 @@ public class MenuUtama extends javax.swing.JFrame {
     private javax.swing.JMenu loginMenu;
     private javax.swing.JMenu masterMenu;
     private javax.swing.JMenuBar menuBar;
-    private javax.swing.JMenuItem produkSewaMenu;
+    private javax.swing.JMenuItem roiMenu;
     // End of variables declaration//GEN-END:variables
     private ReportController reportController;
 
