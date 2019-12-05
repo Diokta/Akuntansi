@@ -18,7 +18,7 @@ public class epsView extends javax.swing.JDialog {
     /**
      * Creates new form PeriodeView
      */
-    public epsView(java.awt.Frame parent, boolean modal, boolean isBulanan) {
+    public epsView(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);

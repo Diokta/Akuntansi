@@ -318,7 +318,7 @@ public class MenuUtama extends javax.swing.JFrame {
     }//GEN-LAST:event_adminMenuActionPerformed
 
     private void epsMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_epsMenuActionPerformed
-        epsView vv = new epsView(this, true, true);
+        epsView vv = new epsView(this, true);
         vv.setVisible(true);
     }//GEN-LAST:event_epsMenuActionPerformed
 
