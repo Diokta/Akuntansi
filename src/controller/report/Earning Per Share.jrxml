@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Cash Rasio" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ee2470e2-3100-4294-a944-34e32faba826">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Earning Per Share" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ee2470e2-3100-4294-a944-34e32faba826">
 	<property name="ireport.zoom" value="1.100000000000001"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -24,41 +24,38 @@
 	<parameter name="NAMAPERUSAHAAN" class="java.lang.String"/>
 	<parameter name="ALAMATPERUSAHAAN" class="java.lang.String"/>
 	<parameter name="TELPPERUSAHAAN" class="java.lang.String"/>
+	<parameter name="JUMLAHLEMBAR" class="java.lang.Integer"/>
+	<parameter name="HARGAPERLEMBAR" class="java.math.BigDecimal"/>
+	<parameter name="BULAN" class="java.lang.String"/>
+	<parameter name="TAHUN" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[SELECT 
-SUM(CASE 
-	WHEN LOWER(a.nama) = "kas" || LOWER(a.nama) = "kas dan setara kas"
-	THEN (t.debit-t.kredit)
-	ELSE 0
-	END) AS total_kas,
-SUM(CASE 
-	WHEN LOWER(a.nama) = "hutang jangka pendek"
-	THEN (t.debit-t.kredit)
-	ELSE 0
-	END) AS total_hutang,
-(SUM(CASE 
-	WHEN LOWER(a.nama) = "kas" || LOWER(a.nama) = "kas dan setara kas"
-	THEN (t.debit-t.kredit)
-	ELSE 0
-	END)/
-SUM(CASE 
-	WHEN LOWER(a.nama) = "hutang jangka pendek"
-	THEN (t.debit-t.kredit)
-	ELSE 0
-	END)*100) AS cash_rasio
+		<![CDATA[SELECT
+     laba_rugi.`ref` AS laba_rugi_ref,
+     laba_rugi.`tanggal` AS laba_rugi_tanggal,
+     laba_rugi.`kelompok` AS laba_rugi_kelompok,
+     laba_rugi.`nama_akun` AS laba_rugi_nama_akun,
+     laba_rugi.`nominal` AS laba_rugi_nominal
 FROM
-    `transaksi` t, `akun` a
+     `laba_rugi` laba_rugi
 WHERE
-    t.id_akun = a.id]]>
+     MONTHNAME(laba_rugi.tanggal)=$P{BULAN} AND YEAR(laba_rugi.tanggal)=$P{TAHUN}
+ORDER BY
+     laba_rugi.kelompok ASC]]>
 	</queryString>
-	<field name="total_kas" class="java.math.BigDecimal"/>
-	<field name="total_hutang" class="java.math.BigDecimal"/>
-	<field name="cash_rasio" class="java.math.BigDecimal"/>
-	<variable name="total_kas_1" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$F{total_kas}]]></variableExpression>
+	<field name="laba_rugi_ref" class="java.lang.String"/>
+	<field name="laba_rugi_tanggal" class="java.sql.Date"/>
+	<field name="laba_rugi_kelompok" class="java.lang.String"/>
+	<field name="laba_rugi_nama_akun" class="java.lang.String"/>
+	<field name="laba_rugi_nominal" class="java.lang.Long"/>
+	<variable name="LABA_RUGI" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[(
+$F{laba_rugi_kelompok}.equals("Pendapatan") ? + $F{laba_rugi_nominal} :
+$F{laba_rugi_kelompok}.equals("Pengeluaran") ? - $F{laba_rugi_nominal} :
+0
+)]]></variableExpression>
 	</variable>
-	<variable name="total_hutang_1" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$F{total_hutang}]]></variableExpression>
+	<variable name="EPS" class="java.lang.Number">
+		<variableExpression><![CDATA[$V{LABA_RUGI}/$P{JUMLAHLEMBAR}]]></variableExpression>
 	</variable>
 	<group name="jurnal_tanggal">
 		<groupExpression><![CDATA[]]></groupExpression>
@@ -104,7 +101,7 @@ WHERE
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Cambria Math" size="22" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Cash Rasio]]></text>
+				<text><![CDATA[Earning Per Share]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="1" y="88" width="120" height="29" uuid="7317df9d-7cbf-45da-8977-1003d8264f4a"/>
@@ -114,29 +111,29 @@ WHERE
 				<text><![CDATA[Rumus :]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="133" y="70" width="120" height="29" uuid="6fe80106-de9a-4a14-afef-798f37760a5b"/>
+				<reportElement x="133" y="77" width="120" height="20" uuid="6fe80106-de9a-4a14-afef-798f37760a5b"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Cambria Math" size="14"/>
 				</textElement>
-				<text><![CDATA[Kas dan Setara Kas]]></text>
+				<text><![CDATA[Laba]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="113" y="108" width="159" height="29" uuid="f271af9f-6589-4462-8744-1c5daac3ff19"/>
+				<reportElement x="113" y="108" width="159" height="25" uuid="f271af9f-6589-4462-8744-1c5daac3ff19"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Cambria Math" size="14"/>
 				</textElement>
-				<text><![CDATA[Hutang Jangka Pendek]]></text>
+				<text><![CDATA[Jumlah Lembar Saham]]></text>
 			</staticText>
 			<line>
 				<reportElement x="111" y="103" width="165" height="1" uuid="7833f232-3598-4798-a961-45bda88c60b0"/>
 			</line>
-			<staticText>
-				<reportElement x="276" y="85" width="120" height="29" uuid="92e90e6e-a1bf-4a4b-860c-ca6a65a0ccc6"/>
+			<textField>
+				<reportElement x="10" y="33" width="555" height="20" uuid="c6ff4c14-92bc-4976-b658-635800884eb2"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Cambria Math" size="14"/>
+					<font fontName="Cambria Math" size="12"/>
 				</textElement>
-				<text><![CDATA[X 100%]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA["Periode Bulan " + $P{BULAN} + " " + $P{TAHUN}]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageHeader>
 	<columnHeader>
@@ -157,49 +154,42 @@ WHERE
 	<summary>
 		<band height="157" splitType="Stretch">
 			<line>
-				<reportElement x="109" y="37" width="165" height="1" uuid="bf6d9c10-fae6-400b-80d5-9d72ae45f2f3"/>
+				<reportElement x="134" y="37" width="165" height="1" uuid="bf6d9c10-fae6-400b-80d5-9d72ae45f2f3"/>
 			</line>
 			<staticText>
-				<reportElement x="1" y="21" width="120" height="29" uuid="ba0f4c30-f29e-443a-b8c5-ef0664354bc9"/>
+				<reportElement x="1" y="21" width="129" height="29" uuid="ba0f4c30-f29e-443a-b8c5-ef0664354bc9"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Cambria Math" size="14"/>
 				</textElement>
-				<text><![CDATA[Cash Rasio =]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="133" y="12" width="120" height="20" uuid="4eadfba3-afca-4443-976d-0c21793513b7"/>
-				<textElement textAlignment="Center">
-					<font fontName="Cambria Math" size="14"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{total_kas_1}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="113" y="44" width="159" height="20" uuid="5e09b1cd-605b-4c45-a633-ddf4e94d6f6a"/>
-				<textElement textAlignment="Center">
-					<font fontName="Cambria Math" size="14"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{total_hutang_1}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="276" y="21" width="120" height="29" uuid="3d8955d0-d672-4d54-8571-2e9d19879a9f"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Cambria Math" size="14"/>
-				</textElement>
-				<text><![CDATA[X 100%]]></text>
+				<text><![CDATA[Earning Per Share =]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1" y="87" width="120" height="29" uuid="f3409b25-6318-4a8d-8d0f-2a09c3065038"/>
+				<reportElement x="1" y="87" width="129" height="29" uuid="f3409b25-6318-4a8d-8d0f-2a09c3065038"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Cambria Math" size="14"/>
 				</textElement>
-				<text><![CDATA[Cash Rasio =]]></text>
+				<text><![CDATA[Earning Per Share =]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="121" y="87" width="100" height="29" uuid="71c01b64-c8d0-4f44-95ae-2e207653de8d"/>
+				<reportElement x="138" y="44" width="159" height="25" uuid="b59a303d-e484-471d-b890-b1f4ede96c8c"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Cambria Math" size="14"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{cash_rasio} +" %"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{JUMLAHLEMBAR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="158" y="10" width="120" height="20" uuid="b49d5893-373f-4220-91f7-b416d64f12db"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Cambria Math" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{LABA_RUGI}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="133" y="87" width="100" height="29" uuid="43b9c023-34b1-4753-a4b0-1c6308431ecf"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Cambria Math" size="14" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{EPS}]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>

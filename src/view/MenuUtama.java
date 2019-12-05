@@ -243,6 +243,11 @@ public class MenuUtama extends javax.swing.JFrame {
         kinerjaMenu.add(jMenuItem1);
 
         jMenuItem3.setText("Earning Per Share");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         kinerjaMenu.add(jMenuItem3);
 
         jMenuItem4.setText("Return on Investment");
@@ -367,6 +372,11 @@ public class MenuUtama extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         reportController.getCashRasio();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        epsView vv = new epsView(this, true, true);
+        vv.setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem Transaksi;

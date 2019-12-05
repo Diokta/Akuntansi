@@ -6,31 +6,25 @@
 package view;
 
 import controller.ReportController;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 
 /**
  *
  * @author Fadli Hudaya
  */
-public class PeriodeView extends javax.swing.JDialog {
+public class epsView extends javax.swing.JDialog {
 
     /**
      * Creates new form PeriodeView
      */
-    public PeriodeView(java.awt.Frame parent, boolean modal, boolean isBulanan) {
+    public epsView(java.awt.Frame parent, boolean modal, boolean isBulanan) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        this.isBulanan = isBulanan;
-        if (!this.isBulanan) {
-            bulanField.setVisible(false);
-        }
         reportController = new ReportController();
     }
-
-    public void setOption(int option) {
-        this.option = option;
-    }
-
+    
     private String parseMonth(Integer bulan) {
         String result = "";
         switch (bulan) {
@@ -85,21 +79,19 @@ public class PeriodeView extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        bulanField = new javax.swing.JComboBox();
-        tahunField = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
         baruButton2 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        lembarField = new javax.swing.JTextField();
+        hargaField = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        bulanField = new javax.swing.JComboBox();
+        tahunField = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        bulanField.setFont(new java.awt.Font("Gill Sans MT", 0, 13)); // NOI18N
-        bulanField.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember" }));
-
-        tahunField.setFont(new java.awt.Font("Gill Sans MT", 0, 13)); // NOI18N
-        tahunField.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023" }));
-
         jLabel2.setFont(new java.awt.Font("Gill Sans MT", 0, 13)); // NOI18N
-        jLabel2.setText("Periode :");
+        jLabel2.setText("Jumlah Lembar Saham :");
 
         baruButton2.setFont(new java.awt.Font("Gill Sans MT", 0, 13)); // NOI18N
         baruButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/batal.png"))); // NOI18N
@@ -110,6 +102,18 @@ public class PeriodeView extends javax.swing.JDialog {
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Gill Sans MT", 0, 13)); // NOI18N
+        jLabel3.setText("Harga Per Lembar:");
+
+        jLabel4.setFont(new java.awt.Font("Gill Sans MT", 0, 13)); // NOI18N
+        jLabel4.setText("Periode :");
+
+        bulanField.setFont(new java.awt.Font("Gill Sans MT", 0, 13)); // NOI18N
+        bulanField.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember" }));
+
+        tahunField.setFont(new java.awt.Font("Gill Sans MT", 0, 13)); // NOI18N
+        tahunField.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -118,15 +122,25 @@ public class PeriodeView extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(baruButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lembarField)
+                            .addComponent(hargaField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bulanField, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(bulanField, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tahunField, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(tahunField, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel2, jLabel3});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -134,10 +148,18 @@ public class PeriodeView extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bulanField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tahunField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(lembarField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(hargaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
                 .addComponent(baruButton2)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -145,25 +167,18 @@ public class PeriodeView extends javax.swing.JDialog {
 
     private void baruButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_baruButton2ActionPerformed
         this.dispose();
-        if (isBulanan) {
-            if (option == 1) {
-                reportController.getReportJurnal(parseMonth(bulanField.getSelectedIndex() + 1), tahunField.getSelectedItem().toString());
-            } else if (option == 2) {
-                reportController.getReportBukuBesar(parseMonth(bulanField.getSelectedIndex() + 1), tahunField.getSelectedItem().toString());
-            } else if (option == 3) {
-                reportController.getReportLabaRugi(parseMonth(bulanField.getSelectedIndex() + 1), tahunField.getSelectedItem().toString());
-            } else {
-                reportController.getReportNeraca(parseMonth(bulanField.getSelectedIndex() + 1), tahunField.getSelectedItem().toString());
-            }
-        } else {
-            reportController.getReportNeracaTahunan(tahunField.getSelectedItem().toString());
-        }
+        reportController.getEPS(parseMonth(bulanField.getSelectedIndex() + 1), tahunField.getSelectedItem().toString(),
+                Integer.parseInt(lembarField.getText()), new BigDecimal(hargaField.getText()));
     }//GEN-LAST:event_baruButton2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton baruButton2;
     private javax.swing.JComboBox bulanField;
+    private javax.swing.JTextField hargaField;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JTextField lembarField;
     private javax.swing.JComboBox tahunField;
     // End of variables declaration//GEN-END:variables
     private ReportController reportController;

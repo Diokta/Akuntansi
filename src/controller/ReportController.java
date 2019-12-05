@@ -7,6 +7,8 @@ package controller;
 
 import connection.ConnectionUtility;
 import java.io.InputStream;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -39,7 +41,7 @@ public class ReportController {
 
     }
     
-     public void getCashRasio() {
+    public void getCashRasio() {
         InputStream stream;
         Map<String, Object> map;
         stream = getClass().getResourceAsStream("report/Cash Rasio.jasper");
@@ -57,6 +59,29 @@ public class ReportController {
 
     }
     
+     public void getEPS(String bulan, String tahun, int jumlahLembar, BigDecimal hargaPerLembar) {
+        InputStream stream;
+        Map<String, Object> map;
+        stream = getClass().getResourceAsStream("report/Earning Per Share.jasper");
+        map = new HashMap<>();
+        map.put("BULAN", bulan);
+        map.put("TAHUN", tahun);
+        map.put("JUMLAHLEMBAR", jumlahLembar);
+        map.put("HARGAPERLEMBAR", hargaPerLembar);
+        map.put("NAMAPERUSAHAAN", MenuUtama.DataPerusahaan.getNama());
+        map.put("ALAMATPERUSAHAAN", MenuUtama.DataPerusahaan.getAlamat());        
+        map.put("TELPPERUSAHAAN", MenuUtama.DataPerusahaan.getNoTelp());
+
+        try {
+            JasperPrint jasperPrint = JasperFillManager.fillReport(stream, map, ConnectionUtility.getConnection());
+            JasperViewer.viewReport(jasperPrint, false);
+        } catch (JRException ex) {
+            //Logger.getLogger(KonsultasiController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+     
+     
     public void getReportPelanggan() {
         InputStream stream;
         Map<String, Object> map;
