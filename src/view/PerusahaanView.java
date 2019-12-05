@@ -32,8 +32,6 @@ public class PerusahaanView extends javax.swing.JInternalFrame {
         setLocation((1366 / 2) - (getWidth() / 2), (768 / 2) - (getHeight() / 2));
     }
 
-
-
     public JTextField getNamaField() {
         return namaField;
     }
@@ -131,6 +129,7 @@ public class PerusahaanView extends javax.swing.JInternalFrame {
 
         alamatField.setColumns(20);
         alamatField.setRows(5);
+        alamatField.setEnabled(false);
         jScrollPane1.setViewportView(alamatField);
 
         jLabel6.setFont(new java.awt.Font("Gill Sans MT", 0, 13)); // NOI18N
@@ -249,7 +248,7 @@ public class PerusahaanView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_updateButtonActionPerformed
 
     private void batalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_batalButtonActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_batalButtonActionPerformed
 
 
