@@ -95,6 +95,10 @@ public class MenuUtama extends javax.swing.JFrame {
         jMenuItem13 = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
+        kinerjaMenu = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SIAK DIFAN");
@@ -228,6 +232,24 @@ public class MenuUtama extends javax.swing.JFrame {
 
         menuBar.add(laporanMenu);
 
+        kinerjaMenu.setText("Kinerja Keuangan");
+
+        jMenuItem1.setText("Current Rasio");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        kinerjaMenu.add(jMenuItem1);
+
+        jMenuItem3.setText("Earning Per Share");
+        kinerjaMenu.add(jMenuItem3);
+
+        jMenuItem4.setText("Return on Investment");
+        kinerjaMenu.add(jMenuItem4);
+
+        menuBar.add(kinerjaMenu);
+
         setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -342,20 +364,28 @@ public class MenuUtama extends javax.swing.JFrame {
         dv.setVisible(true);
     }//GEN-LAST:event_daftarMenuMouseClicked
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        reportController.getCashRasio();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem Transaksi;
     private javax.swing.JMenuItem adminMenu;
     private javax.swing.JMenuItem biayaOperasionalMenu;
     private javax.swing.JMenu daftarMenu;
     private Fadly.CustomComponents.component.DesktopPane desktopPane;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JMenu kinerjaMenu;
     private javax.swing.JMenu laporanMenu;
     private javax.swing.JMenu loginMenu;
     private javax.swing.JMenu masterMenu;
