@@ -258,8 +258,8 @@ public class TransaksiJurnalModel {
                 prepare4.setObject(3, transaksi_jurnal.getKeterangan());
                 prepare4.setObject(4, "Kas");
                 prepare4.setObject(5, 1);
-                prepare4.setObject(6, 0);
-                prepare4.setObject(7, transaksi_jurnal.getKredit());
+                prepare4.setObject(6, transaksi_jurnal.getKredit());
+                prepare4.setObject(7, 0);
                 
                 prepare5.setObject(1, transaksi_jurnal.getTanggal());
                 prepare5.setObject(2, transaksi_jurnal.getId_jurnal());

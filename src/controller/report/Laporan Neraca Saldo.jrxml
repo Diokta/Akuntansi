@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Laporan Neraca Saldo" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Laporan Neraca Saldo" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="931243b9-74d1-448c-9d56-b1f1daec7c40">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="26"/>
@@ -68,22 +68,21 @@ ORDER BY
 		<groupFooter>
 			<band height="21">
 				<textField pattern="#,##0">
-					<reportElement style="RecordStyle" x="306" y="0" width="100" height="21"/>
+					<reportElement style="RecordStyle" x="306" y="0" width="100" height="21" uuid="a873c8d1-3d89-42e7-b7a4-ef63775afa54"/>
 					<textElement textAlignment="Right">
 						<font isBold="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{TOTAL_DEBIT}]]></textFieldExpression>
 				</textField>
 				<textField pattern="#,##0">
-					<reportElement style="RecordStyle" x="406" y="0" width="100" height="21"/>
+					<reportElement style="RecordStyle" x="406" y="0" width="100" height="21" uuid="cf45a438-e2a7-43da-b8bb-7a8584f896a1"/>
 					<textElement textAlignment="Right">
 						<font isBold="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{TOTAL_KREDIT}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement style="RecordStyle" x="56" y="0" width="250" height="21"/>
-					<textElement/>
+					<reportElement style="RecordStyle" x="56" y="0" width="250" height="21" uuid="6f91c56e-bead-4bcb-9634-dfc1f1c85e09"/>
 					<textFieldExpression><![CDATA[$F{buku_besar_nama_akun}]]></textFieldExpression>
 				</textField>
 			</band>
@@ -95,34 +94,34 @@ ORDER BY
 	<title>
 		<band height="103" splitType="Stretch">
 			<textField>
-				<reportElement x="120" y="43" width="435" height="20"/>
+				<reportElement x="120" y="43" width="435" height="20" uuid="493957de-f705-42b8-8441-1411d4782432"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Cambria Math" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA["NO. TELP : " + $P{TELPPERUSAHAAN}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="120" y="0" width="435" height="43"/>
+				<reportElement x="120" y="0" width="435" height="43" uuid="4a58ceab-3f91-4498-bf57-b2e8e7927b04"/>
 				<textElement>
 					<font fontName="Cambria Math" size="30"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{NAMAPERUSAHAAN}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="0" y="94" width="802" height="1"/>
+				<reportElement x="0" y="94" width="802" height="1" uuid="0939a6ee-ae5c-42c0-97de-b795bbb494e6"/>
 				<graphicElement>
 					<pen lineWidth="1.75"/>
 				</graphicElement>
 			</line>
 			<textField>
-				<reportElement x="120" y="63" width="435" height="20"/>
+				<reportElement x="120" y="63" width="435" height="20" uuid="030063f7-c16e-4774-9118-e6a1d5213144"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Cambria Math" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA["ALAMAT : " + $P{ALAMATPERUSAHAAN}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="0" y="95" width="555" height="1"/>
+				<reportElement x="0" y="95" width="555" height="1" uuid="fba64f97-64e7-4778-b8db-480a213e0663"/>
 				<graphicElement>
 					<pen lineWidth="1.75"/>
 				</graphicElement>
@@ -132,14 +131,14 @@ ORDER BY
 	<pageHeader>
 		<band height="54" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="555" height="28"/>
+				<reportElement x="0" y="0" width="555" height="28" uuid="227ccce1-54a5-428c-9542-f5dff535e5da"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Cambria Math" size="18"/>
 				</textElement>
 				<text><![CDATA[Laporan Neraca Saldo]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="0" y="28" width="555" height="20"/>
+				<reportElement x="0" y="28" width="555" height="20" uuid="015160d7-b8e8-4b0b-aacd-cc0aa4341085"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Cambria Math" size="12"/>
 				</textElement>
@@ -150,17 +149,17 @@ ORDER BY
 	<columnHeader>
 		<band height="20" splitType="Stretch">
 			<staticText>
-				<reportElement style="HeaderStyle" x="56" y="0" width="250" height="20"/>
+				<reportElement style="HeaderStyle" x="56" y="0" width="250" height="20" uuid="24702f8d-f872-4191-8dcb-897f28b7a818"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<text><![CDATA[Nama Akun]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="HeaderStyle" x="306" y="0" width="100" height="20"/>
+				<reportElement style="HeaderStyle" x="306" y="0" width="100" height="20" uuid="7408903f-86e9-4afd-8ea0-a324bb4bbab6"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<text><![CDATA[Debit]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="HeaderStyle" x="406" y="0" width="100" height="20"/>
+				<reportElement style="HeaderStyle" x="406" y="0" width="100" height="20" uuid="96d9058e-2db6-4e2d-84fd-165cd3075519"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<text><![CDATA[Kredit]]></text>
 			</staticText>
@@ -175,14 +174,14 @@ ORDER BY
 	<lastPageFooter>
 		<band height="145">
 			<staticText>
-				<reportElement x="56" y="11" width="175" height="29"/>
+				<reportElement x="56" y="11" width="175" height="29" uuid="9def24b1-36eb-4abb-9bc5-b0d6740314e7"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Cambria Math" size="12"/>
 				</textElement>
 				<text><![CDATA[Dibuat Oleh :]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="56" y="96" width="175" height="29"/>
+				<reportElement x="56" y="96" width="175" height="29" uuid="882a0405-12bd-48b9-a161-ce6870845971"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Cambria Math" size="12"/>
 				</textElement>
@@ -193,14 +192,14 @@ ORDER BY
 	<summary>
 		<band height="42" splitType="Stretch">
 			<textField pattern="#,##0">
-				<reportElement style="RecordStyle" x="306" y="0" width="100" height="20"/>
+				<reportElement style="RecordStyle" x="306" y="0" width="100" height="20" uuid="da5d5ea8-1e81-44da-974a-c41c965b513e"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{SUM_TOT_DEBIT}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement style="RecordStyle" x="406" y="0" width="100" height="20"/>
+				<reportElement style="RecordStyle" x="406" y="0" width="100" height="20" uuid="ab64f563-b317-4e9a-aec5-60793ffc281d"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
