@@ -62,11 +62,19 @@ public class MenuUtama extends javax.swing.JFrame {
             laporanMenu.setEnabled(true);
             loginMenu.setText("Logout");
             menuBar.remove(daftarMenu);
+            kinerjaMenu.setEnabled(true);
+            
+            MenuInternalView mv = new MenuInternalView(this);
+            desktopPane.removeAll();
+            desktopPane.updateUI();
+            desktopPane.add(mv);
+            mv.setVisible(true);
     }
 
     private void deactive() {
         masterMenu.setEnabled(false);
         laporanMenu.setEnabled(false);
+        kinerjaMenu.setEnabled(false);
         loginMenu.setText("Login");
         menuBar.add(daftarMenu,0);
     }
@@ -246,11 +254,7 @@ public class MenuUtama extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void biayaOperasionalMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_biayaOperasionalMenuActionPerformed
-        AkunView bv = new AkunView();
-        desktopPane.removeAll();
-        desktopPane.updateUI();
-        desktopPane.add(bv);
-        bv.setVisible(true);
+        showAkunMenu();
     }//GEN-LAST:event_biayaOperasionalMenuActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
@@ -283,11 +287,7 @@ public class MenuUtama extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     private void TransaksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TransaksiActionPerformed
-        TransaksiJurnalView tjv = new TransaksiJurnalView();
-        desktopPane.removeAll();
-        desktopPane.add(tjv);
-        desktopPane.updateUI();
-        tjv.setVisible(true);
+        showTransaksiMenu();
     }//GEN-LAST:event_TransaksiActionPerformed
 
     private void loginMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginMenuMouseClicked
@@ -305,7 +305,6 @@ public class MenuUtama extends javax.swing.JFrame {
 
     private void daftarMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_daftarMenuMouseClicked
         DaftarView dv = new DaftarView();
-        desktopPane.removeAll();
         desktopPane.add(dv);
         desktopPane.updateUI();
         dv.setVisible(true);
@@ -316,11 +315,7 @@ public class MenuUtama extends javax.swing.JFrame {
     }//GEN-LAST:event_CurrentRasioMenuActionPerformed
 
     private void adminMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminMenuActionPerformed
-        PerusahaanView pv = new PerusahaanView();
-        desktopPane.removeAll();
-        desktopPane.add(pv);
-        desktopPane.updateUI();
-        pv.setVisible(true);
+        showPerusahaanMenu();
     }//GEN-LAST:event_adminMenuActionPerformed
 
     private void epsMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_epsMenuActionPerformed
@@ -361,5 +356,26 @@ public class MenuUtama extends javax.swing.JFrame {
         } catch (UnsupportedLookAndFeelException ex) {
             Logger.getLogger(MenuUtama.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public void showPerusahaanMenu() {
+        PerusahaanView pv = new PerusahaanView();
+        desktopPane.add(pv);
+        desktopPane.updateUI();
+        pv.setVisible(true);
+    }
+
+    public void showAkunMenu() {
+        AkunView bv = new AkunView();
+        desktopPane.updateUI();
+        desktopPane.add(bv);
+        bv.setVisible(true);
+    }
+
+    public void showTransaksiMenu() {
+        TransaksiJurnalView tjv = new TransaksiJurnalView();
+        desktopPane.add(tjv);
+        desktopPane.updateUI();
+        tjv.setVisible(true);
     }
 }
