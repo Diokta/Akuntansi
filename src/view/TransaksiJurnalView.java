@@ -174,13 +174,24 @@ public class TransaksiJurnalView extends javax.swing.JInternalFrame {
         jLabel3.setText("Debet :");
 
         akunCombo.setFont(new java.awt.Font("Gill Sans MT", 0, 13)); // NOI18N
+        akunCombo.setMaximumSize(new java.awt.Dimension(31, 22));
 
         jLabel5.setFont(new java.awt.Font("Gill Sans MT", 0, 13)); // NOI18N
         jLabel5.setText("Kredit :");
 
         kreditField.setFont(new java.awt.Font("Gill Sans MT", 0, 13)); // NOI18N
+        kreditField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                kreditFieldFocusGained(evt);
+            }
+        });
 
         debetField.setFont(new java.awt.Font("Gill Sans MT", 0, 13)); // NOI18N
+        debetField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                debetFieldFocusLost(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -189,22 +200,16 @@ public class TransaksiJurnalView extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel3))
-                        .addGap(32, 32, 32)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(debetField)
-                            .addComponent(kreditField)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(akunCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(akunCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+                    .addComponent(debetField)
+                    .addComponent(kreditField))
                 .addContainerGap())
         );
 
@@ -370,6 +375,18 @@ public class TransaksiJurnalView extends javax.swing.JInternalFrame {
     private void hapusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusButtonActionPerformed
         transaksiJurnalController.saveOrDelete(id, this.getIdField().getText());
     }//GEN-LAST:event_hapusButtonActionPerformed
+
+    private void debetFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_debetFieldFocusLost
+        if (getDebetField().getText().isEmpty()) {
+            getDebetField().setText("0");
+        }
+    }//GEN-LAST:event_debetFieldFocusLost
+
+    private void kreditFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_kreditFieldFocusGained
+        if (!getDebetField().getText().isEmpty()) {
+            getKreditField().setText("0");
+        }
+    }//GEN-LAST:event_kreditFieldFocusGained
 
     public JLabel getLabelWarning() {
         return labelWarning;
