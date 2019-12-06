@@ -258,32 +258,23 @@ public class MenuUtama extends javax.swing.JFrame {
     }//GEN-LAST:event_biayaOperasionalMenuActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        PeriodeView pv = new PeriodeView(this, true, true);
-        pv.setOption(1);
-        pv.setVisible(true);
+        showJurnalUmum();
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        PeriodeView pv = new PeriodeView(this, true, true);
-        pv.setOption(2);
-        pv.setVisible(true);
+        showBukuBesar();
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
-        PeriodeView pv = new PeriodeView(this, true, true);
-        pv.setOption(3);
-        pv.setVisible(true);
+        showLabaRugi();
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
-        PeriodeView pv = new PeriodeView(this, true, true);
-        pv.setOption(4);
-        pv.setVisible(true);
+        showNeracaBulanan();
     }//GEN-LAST:event_jMenuItem13ActionPerformed
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
-        PeriodeView pv = new PeriodeView(this, true, false);
-        pv.setVisible(true);
+        showNeracaTahunan();
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     private void TransaksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TransaksiActionPerformed
@@ -311,7 +302,7 @@ public class MenuUtama extends javax.swing.JFrame {
     }//GEN-LAST:event_daftarMenuMouseClicked
 
     private void CurrentRasioMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CurrentRasioMenuActionPerformed
-        reportController.getCashRasio();
+        showCR();
     }//GEN-LAST:event_CurrentRasioMenuActionPerformed
 
     private void adminMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminMenuActionPerformed
@@ -319,13 +310,11 @@ public class MenuUtama extends javax.swing.JFrame {
     }//GEN-LAST:event_adminMenuActionPerformed
 
     private void epsMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_epsMenuActionPerformed
-        epsView vv = new epsView(this, true);
-        vv.setVisible(true);
+        showEPS();
     }//GEN-LAST:event_epsMenuActionPerformed
 
     private void roiMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roiMenuActionPerformed
-        roiView rv = new roiView(this, true);
-        rv.setVisible(true);
+        showROI();
     }//GEN-LAST:event_roiMenuActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -348,7 +337,7 @@ public class MenuUtama extends javax.swing.JFrame {
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem roiMenu;
     // End of variables declaration//GEN-END:variables
-    private ReportController reportController;
+    public ReportController reportController;
 
     static {
         try {
@@ -377,5 +366,48 @@ public class MenuUtama extends javax.swing.JFrame {
         desktopPane.add(tjv);
         desktopPane.updateUI();
         tjv.setVisible(true);
+    }
+
+    public void showJurnalUmum() {
+        PeriodeView pv = new PeriodeView(this, true, true);
+        pv.setOption(1);
+        pv.setVisible(true);
+    }
+
+    public void showBukuBesar() {
+        PeriodeView pv = new PeriodeView(this, true, true);
+        pv.setOption(2);
+        pv.setVisible(true);
+    }
+
+    public void showNeracaBulanan() {
+        PeriodeView pv = new PeriodeView(this, true, true);
+        pv.setOption(4);
+        pv.setVisible(true);
+    }
+
+    public void showNeracaTahunan() {
+        PeriodeView pv = new PeriodeView(this, true, false);
+        pv.setVisible(true);
+    }
+
+    public void showLabaRugi() {
+        PeriodeView pv = new PeriodeView(this, true, true);
+        pv.setOption(3);
+        pv.setVisible(true);
+    }
+
+    public void showEPS() {
+        epsView vv = new epsView(this, true);
+        vv.setVisible(true);
+    }
+
+    public void showCR() {
+        reportController.getCashRasio();
+    }
+
+    public void showROI() {
+        roiView rv = new roiView(this, true);
+        rv.setVisible(true);
     }
 }
